@@ -8,7 +8,7 @@ export default function HowToRequestAppointment() {
             {/* Hero Section */}
             <section className="bg-hospital-blue text-white py-16 px-4">
                 <div className="container mx-auto max-w-4xl text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-6">¿Cómo solicito una cita médica?</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold mb-6">Cómo Obtener Cita</h1>
                     <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
                         Guía para entender el Sistema de Referencias (REFCON) y acceder a la atención especializada.
                     </p>
