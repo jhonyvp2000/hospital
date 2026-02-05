@@ -7,7 +7,7 @@ export default function Home() {
       <section className="bg-hospital-blue text-white py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Hospital Tarapoto</h1>
-          <p className="text-xl md:text-2xl mb-8 opactiy-90">Redefiniendo la atención médica a tu medida</p>
+          <p className="text-xl md:text-2xl mb-8 opactiy-90">Evolucionamos para cuidarte mejor</p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button className="bg-white text-hospital-blue px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
               Reserva tu Cita
