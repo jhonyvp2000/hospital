@@ -1,7 +1,8 @@
 import {
     FileText, Activity, Pill, Calendar, Clock, CreditCard, Shield,
-    MapPin, Users, BookOpen, MessageSquare, Building, Scale, Newspaper,
-    Briefcase, GraduationCap, Link
+    MapPin, Users, BookOpen, Building, Scale, Newspaper,
+    Briefcase, GraduationCap, Link, HeartPulse, Stethoscope, Microscope,
+    Syringe, Baby, Siren, Info
 } from 'lucide-react';
 import React from 'react';
 
@@ -35,7 +36,7 @@ export const MENU_DATA: MenuCategory[] = [
                 items: [
                     { title: "Resultados de Exámenes", href: "/resultados", icon: Activity },
                     { title: "Mi Historia Clínica", href: "/historia", icon: FileText },
-                    { title: "Mis Recetas", href: "/recetas", icon: Pill }, // Using Pill as proxy for prescription
+                    { title: "Mis Recetas", href: "/recetas", icon: Pill },
                     { title: "Próximos Pasos", href: "/indicaciones", icon: Link },
                 ]
             },
@@ -69,13 +70,44 @@ export const MENU_DATA: MenuCategory[] = [
     },
     {
         label: "INSTITUCIONAL",
-        type: "dropdown",
-        items: [
-            { title: "Quiénes Somos / Historia", href: "/nosotros", icon: Building },
-            { title: "Dirección Ejecutiva", href: "/direccion", icon: Users },
-            { title: "Documentos de Gestión", href: "/gestion", icon: FileText },
-            { title: "Transparencia Estándar", href: "/transparencia", icon: FileText },
-            { title: "Sala de Prensa / Noticias", href: "/noticias", icon: Newspaper },
+        type: "mega",
+        columns: [
+            {
+                title: "Nuestra Identidad 🏥",
+                items: [
+                    { title: "Quiénes Somos", href: "/nosotros", icon: Building, description: "Historia, Misión y Visión" },
+                    { title: "Organigrama", href: "/organigrama", icon: Activity },
+                    { title: "Directorio Institucional", href: "/directorio", icon: Users },
+                    { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin },
+                ]
+            },
+            {
+                title: "Gestión y Transparencia 📋",
+                items: [
+                    { title: "Portal de Transparencia", href: "/transparencia", icon: Shield, description: "Acceso a información pública" },
+                    { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
+                    { title: "Normatividad", href: "/normatividad", icon: Scale },
+                    { title: "Sala de Prensa", href: "/noticias", icon: Newspaper },
+                ]
+            },
+            {
+                title: "Cartera de Servicios (Nivel II-2) 💉",
+                items: [
+                    { title: "Consulta Externa", href: "/servicios/consulta", icon: Stethoscope },
+                    { title: "Emergencia y UCI", href: "/servicios/emergencia", icon: Siren },
+                    { title: "Centro Quirúrgico", href: "/servicios/cirugia", icon: HeartPulse },
+                    { title: "Ayuda al Diagnóstico", href: "/servicios/diagnostico", icon: Microscope, description: "Laboratorio, Rayos X, Banco de Sangre" },
+                ]
+            },
+            {
+                title: "Programas Estratégicos 🎗️",
+                items: [
+                    { title: "Materno Neonatal", href: "/programas/materno", icon: Baby },
+                    { title: "TBC y VIH", href: "/programas/tbc-vih", icon: Pill },
+                    { title: "Enfermedades Metaxénicas", href: "/programas/dengue", icon: Info, description: "Dengue, Zika, Chikungunya" },
+                    { title: "Salud Mental", href: "/programas/salud-mental", icon: Activity },
+                ]
+            }
         ]
     },
     {
@@ -89,6 +121,3 @@ export const MENU_DATA: MenuCategory[] = [
         ]
     }
 ];
-
-// Re-export specific icons for usage if needed, but they are embedded in data usually.
-// Note: 'users' lowercase might be a typo in my thought process, should be Users. Fixed in object.
