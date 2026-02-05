@@ -119,8 +119,8 @@ export default function EmergencyPage() {
                 </section>
 
                 <div className="text-center">
-                    <Link href="/" className="text-gray-500 hover:text-hospital-blue font-medium transition-colors">
-                        &larr; Volver a la Página Principal
+                    <Link href="/" className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-hospital-blue hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl">
+                        Volver al Inicio
                     </Link>
                 </div>
 
