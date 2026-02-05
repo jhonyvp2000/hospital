@@ -1,4 +1,7 @@
 
+import Image from "next/image";
+import Link from 'next/link';
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
@@ -9,9 +12,9 @@ export default function Home() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Hospital Tarapoto</h1>
           <p className="text-xl md:text-2xl mb-8 opactiy-90">Evolucionamos para cuidarte mejor</p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <button className="bg-white text-hospital-blue px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+            <Link href="/como-solicitar-cita" className="bg-white text-hospital-blue px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors inline-block">
               ¿Cómo solicito una cita médica?
-            </button>
+            </Link>
             <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-hospital-blue transition-colors">
               Emergencias
             </button>
