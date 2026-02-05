@@ -15,9 +15,9 @@ export default function Home() {
             <Link href="/como-solicitar-cita" className="bg-white text-hospital-blue px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors inline-block">
               Cómo Obtener Cita
             </Link>
-            <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-hospital-blue transition-colors">
+            <Link href="/emergencias" className="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-hospital-blue transition-colors inline-block">
               Atención de emergencias
-            </button>
+            </Link>
           </div>
         </div>
       </section>
