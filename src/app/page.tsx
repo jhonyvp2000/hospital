@@ -10,7 +10,7 @@ export default function Home() {
           <p className="text-xl md:text-2xl mb-8 opactiy-90">Evolucionamos para cuidarte mejor</p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button className="bg-white text-hospital-blue px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
-              Reserva tu Cita
+              ¿Cómo solicito una cita médica?
             </button>
             <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-hospital-blue transition-colors">
               Emergencias
