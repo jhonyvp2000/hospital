@@ -16,7 +16,7 @@ export default function Home() {
               Cómo Obtener Cita
             </Link>
             <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-hospital-blue transition-colors">
-              Emergencias
+              Atención de emergencias
             </button>
           </div>
         </div>
