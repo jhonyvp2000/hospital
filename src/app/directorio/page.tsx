@@ -120,26 +120,26 @@ export default function DirectoryPage() {
                                     )}
                                 </div>
 
-                                <div>
-                                    <span className="text-xs font-bold text-hospital-light uppercase tracking-wider mb-1 block">
+                                <div className="flex-1 min-w-0">
+                                    <span className="text-xs font-bold text-hospital-light uppercase tracking-wider mb-1 block break-words">
                                         {person.department}
                                     </span>
-                                    <h3 className="font-bold text-gray-800 text-lg leading-tight mb-2">
+                                    <h3 className="font-bold text-gray-800 text-lg leading-tight mb-2 break-words">
                                         {person.name}
                                     </h3>
-                                    <p className="text-gray-500 text-sm font-medium mb-4 flex items-center gap-1">
-                                        <Award className="w-4 h-4 text-gray-400" />
-                                        {person.role}
+                                    <p className="text-gray-500 text-sm font-medium mb-4 flex items-start gap-1">
+                                        <Award className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+                                        <span className="break-words">{person.role}</span>
                                     </p>
 
                                     <div className="space-y-2">
-                                        <a href={`mailto:${person.email}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors">
-                                            <Mail className="w-4 h-4" />
-                                            <span className="truncate">{person.email}</span>
+                                        <a href={`mailto:${person.email}`} className="flex items-start gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
+                                            <Mail className="w-4 h-4 shrink-0 mt-0.5 group-hover/link:text-hospital-light" />
+                                            <span className="break-all">{person.email}</span>
                                         </a>
-                                        <a href="tel:+51042522133" className="flex items-center gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors">
-                                            <Phone className="w-4 h-4" />
-                                            <span>{person.phone}</span>
+                                        <a href="tel:+51042522133" className="flex items-start gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
+                                            <Phone className="w-4 h-4 shrink-0 mt-0.5 group-hover/link:text-hospital-light" />
+                                            <span className="break-words">{person.phone}</span>
                                         </a>
                                     </div>
                                 </div>
