@@ -60,7 +60,7 @@ export const MENU_DATA: MenuCategory[] = [
             {
                 title: "Guía del Paciente 📍",
                 items: [
-                    { title: "Staff Médico", href: "/medicos", icon: Users },
+                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
                     { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
                     { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
                     { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
@@ -76,7 +76,7 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Nuestra Identidad 🏥",
                 items: [
                     { title: "Quiénes Somos", href: "/nosotros", icon: Building, description: "Historia, Misión y Visión" },
-                    { title: "Medicos", href: "#", icon: Users },
+                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
                     { title: "Organigrama", href: "/organigrama", icon: Activity },
                     { title: "Directorio Institucional", href: "/directorio", icon: Users },
                     { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin },
