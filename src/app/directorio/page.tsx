@@ -110,35 +110,35 @@ export default function DirectoryPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {DIRECTORY_DATA.map((person) => (
                         <div key={person.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
-                            <div className="p-6 flex items-start gap-4">
+                            <div className="p-6 flex flex-col items-center text-center gap-4">
                                 {/* Avatar / Placeholder */}
-                                <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-hospital-blue shrink-0 group-hover:bg-hospital-blue group-hover:text-white transition-colors">
+                                <div className="w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center text-hospital-blue shrink-0 group-hover:bg-hospital-blue group-hover:text-white transition-colors mb-2">
                                     {person.image ? (
                                         <img src={person.image} alt={person.name} className="w-full h-full object-cover rounded-full" />
                                     ) : (
-                                        <User className="w-8 h-8" />
+                                        <User className="w-10 h-10" />
                                     )}
                                 </div>
 
-                                <div className="flex-1 min-w-0">
-                                    <span className="text-xs font-bold text-hospital-light uppercase tracking-wider mb-1 block break-words">
+                                <div className="w-full min-w-0">
+                                    <span className="text-xs font-bold text-hospital-light uppercase tracking-wider mb-2 block break-words">
                                         {person.department}
                                     </span>
-                                    <h3 className="font-bold text-gray-800 text-lg leading-tight mb-2 break-words">
+                                    <h3 className="font-bold text-gray-800 text-xl leading-tight mb-2 break-words">
                                         {person.name}
                                     </h3>
-                                    <p className="text-gray-500 text-sm font-medium mb-4 flex items-start gap-1">
-                                        <Award className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+                                    <p className="text-gray-500 text-sm font-medium mb-6 flex items-center justify-center gap-1">
+                                        <Award className="w-4 h-4 text-gray-400 shrink-0" />
                                         <span className="break-words">{person.role}</span>
                                     </p>
 
-                                    <div className="space-y-2">
-                                        <a href={`mailto:${person.email}`} className="flex items-start gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
-                                            <Mail className="w-4 h-4 shrink-0 mt-0.5 group-hover/link:text-hospital-light" />
-                                            <span className="break-all">{person.email}</span>
+                                    <div className="space-y-3 border-t border-gray-100 pt-4 w-full">
+                                        <a href={`mailto:${person.email}`} className="flex items-center justify-center gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
+                                            <Mail className="w-4 h-4 shrink-0 group-hover/link:text-hospital-light" />
+                                            <span className="break-all text-left">{person.email}</span>
                                         </a>
-                                        <a href="tel:+51042522133" className="flex items-start gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
-                                            <Phone className="w-4 h-4 shrink-0 mt-0.5 group-hover/link:text-hospital-light" />
+                                        <a href="tel:+51042522133" className="flex items-center justify-center gap-2 text-sm text-gray-600 hover:text-hospital-blue transition-colors group/link">
+                                            <Phone className="w-4 h-4 shrink-0 group-hover/link:text-hospital-light" />
                                             <span className="break-words">{person.phone}</span>
                                         </a>
                                     </div>
