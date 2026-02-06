@@ -88,7 +88,7 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Portal de Transparencia", href: "/transparencia", icon: Shield, description: "Acceso a información pública" },
                     { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
                     { title: "Normatividad", href: "/normatividad", icon: Scale },
-                    { title: "Sala de Prensa", href: "/noticias", icon: Newspaper },
+                    { title: "Sala de Prensa", href: "/sala-de-prensa", icon: Newspaper },
                 ]
             },
             {
