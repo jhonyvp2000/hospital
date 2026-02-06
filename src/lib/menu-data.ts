@@ -34,9 +34,9 @@ export const MENU_DATA: MenuCategory[] = [
             {
                 title: "Mi Salud 🩺",
                 items: [
-                    { title: "Resultados de Exámenes", href: "/resultados", icon: Activity },
-                    { title: "Mi Historia Clínica", href: "/historia", icon: FileText },
-                    { title: "Mis Recetas", href: "/recetas", icon: Pill },
+                    { title: "Resultados de Exámenes", href: "/portal/resultados", icon: Activity },
+                    { title: "Mi Historia Clínica", href: "/portal/historia", icon: FileText },
+                    { title: "Mis Recetas", href: "/portal/recetas", icon: Pill },
                     { title: "Próximos Pasos", href: "/indicaciones", icon: Link },
                 ]
             },
