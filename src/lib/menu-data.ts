@@ -76,6 +76,7 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Nuestra Identidad 🏥",
                 items: [
                     { title: "Quiénes Somos", href: "/nosotros", icon: Building, description: "Historia, Misión y Visión" },
+                    { title: "Medicos", href: "#", icon: Users },
                     { title: "Organigrama", href: "/organigrama", icon: Activity },
                     { title: "Directorio Institucional", href: "/directorio", icon: Users },
                     { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin },
@@ -91,7 +92,7 @@ export const MENU_DATA: MenuCategory[] = [
                 ]
             },
             {
-                title: "Cartera de Servicios (Nivel II-2) 💉",
+                title: "Cartera de Servicios 💉",
                 items: [
                     { title: "Consulta Externa", href: "/servicios/consulta", icon: Stethoscope },
                     { title: "Emergencia y UCI", href: "/servicios/emergencia", icon: Siren },
