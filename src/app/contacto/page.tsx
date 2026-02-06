@@ -100,7 +100,7 @@ export default function ContactoPage() {
                         {/* Map Section */}
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden h-64 md:h-80 relative">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.708688435756!2d-76.37452892500858!3d-6.495055093497042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ba0be306161491%3A0xe5a3c9bd6047c32!2sHospital%20II%20-%202%20Tarapoto!5e0!3m2!1ses!2spe!4v1707234567890!5m2!1ses!2spe"
+                                src="https://maps.google.com/maps?q=Hospital+II-2+Tarapoto&t=&z=15&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
