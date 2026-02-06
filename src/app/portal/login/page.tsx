@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Lock, User, Eye, EyeOff, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { Lock, User, Eye, EyeOff, ShieldCheck, AlertTriangle, Info, MapPin } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
@@ -30,41 +30,56 @@ export default function LoginPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col md:flex-row max-w-4xl w-full">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col md:flex-row max-w-5xl w-full">
 
-                {/* Left Side: Info */}
-                <div className="bg-hospital-blue p-8 md:p-12 md:w-5/12 text-white flex flex-col justify-center relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-bold mb-6">Portal del Paciente</h2>
-                        <ul className="space-y-6 text-blue-50">
-                            <li className="flex gap-4">
-                                <div className="bg-white/20 p-2 rounded-lg h-fit">
-                                    <ShieldCheck className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white">Seguridad Garantizada</h4>
-                                    <p className="text-sm mt-1 opacity-90">Acceso protegido a su información médica personal bajo normativa de ley.</p>
-                                </div>
-                            </li>
-                            <li className="flex gap-4">
-                                <div className="bg-white/20 p-2 rounded-lg h-fit">
-                                    <User className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white">Cuenta Personal</h4>
-                                    <p className="text-sm mt-1 opacity-90">Gestione sus citas, resultados y recetas desde un solo lugar.</p>
-                                </div>
-                            </li>
-                        </ul>
+                {/* Left Side: Instructions & Education */}
+                <div className="bg-blue-50 p-8 md:p-10 md:w-5/12 flex flex-col justify-center border-r border-blue-100">
+                    <h2 className="text-2xl font-bold text-hospital-blue mb-6">Portal del Paciente</h2>
+
+                    <div className="space-y-6">
+                        <div className="bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                            <h3 className="font-bold text-gray-800 flex items-center gap-2 mb-2 text-sm">
+                                <Lock className="w-4 h-4 text-hospital-blue" />
+                                ¿Cómo obtengo mi contraseña?
+                            </h3>
+                            <p className="text-sm text-gray-600 leading-relaxed">
+                                Por su seguridad y la confidencialidad de sus datos médicos, la contraseña se entrega <strong>únicamente de forma presencial</strong>.
+                            </p>
+                            <div className="mt-3 flex items-start gap-2 text-xs text-gray-500 bg-gray-50 p-2 rounded border border-gray-100">
+                                <MapPin className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                                <span>Acérquese al módulo de <strong>Admisión / Informes</strong> con su DNI físico para solicitar su clave digital gratuita.</span>
+                            </div>
+                        </div>
+
+                        <div className="space-y-3">
+                            <h4 className="text-sm font-bold text-gray-700 uppercase tracking-wider">Beneficios del Portal</h4>
+                            <ul className="space-y-3 text-sm text-gray-600">
+                                <li className="flex items-center gap-3">
+                                    <div className="bg-green-100 p-1.5 rounded-full text-green-600">
+                                        <ShieldCheck className="w-3 h-3" />
+                                    </div>
+                                    <span>Acceso 100% seguro y confidencial.</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="bg-purple-100 p-1.5 rounded-full text-purple-600">
+                                        <Info className="w-3 h-3" />
+                                    </div>
+                                    <span>Historial de atenciones y recetas.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="text-xs text-gray-400 mt-4 leading-tight">
+                            * Sus datos están protegidos conforme a la <strong>Ley N° 29733</strong> de Protección de Datos Personales.
+                        </div>
                     </div>
                 </div>
 
-                {/* Right Side: Form */}
+                {/* Right Side: Login Form */}
                 <div className="p-8 md:p-12 md:w-7/12 flex flex-col justify-center">
                     <div className="mb-8 text-center md:text-left">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-2">Bienvenido de nuevo</h3>
-                        <p className="text-gray-500 text-sm">Ingrese sus credenciales para acceder a su historia clínica.</p>
+                        <h3 className="text-2xl font-bold text-gray-800 mb-1">Iniciar Sesión</h3>
+                        <p className="text-gray-500 text-sm">Ingrese sus credenciales para acceder.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
@@ -134,18 +149,14 @@ export default function LoginPage() {
                         >
                             {isLoading ? (
                                 <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                            ) : "Iniciar Sesión Segura"}
+                            ) : "Ingresar al Portal"}
                         </button>
                     </form>
-
-                    <p className="mt-8 text-center text-xs text-gray-500">
-                        ¿Olvidó su contraseña? Acérquese al módulo de Admisión.
-                    </p>
                 </div>
             </div>
 
             <p className="fixed bottom-4 text-xs text-gray-400">
-                © 2026 Hospital II-2 Tarapoto. Todos los derechos reservados.
+                © 2026 Hospital II-2 Tarapoto.
             </p>
         </div>
     );
