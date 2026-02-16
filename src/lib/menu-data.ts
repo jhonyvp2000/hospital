@@ -37,7 +37,7 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Resultados de Exámenes", href: "/portal/resultados", icon: Activity, description: "Consulta y descarga" },
                     { title: "Mi Historia Clínica", href: "/portal/historia", icon: FileText, description: "Tu historial médico" },
                     { title: "Mis Recetas", href: "/portal/recetas", icon: Pill, description: "Medicamentos pendientes" },
-                    { title: "Próximos Pasos", href: "/indicaciones", icon: Link, description: "Indicaciones médicas" },
+                    { title: "Próximos Pasos", href: "/portal/indicaciones", icon: Link, description: "Indicaciones médicas" },
                 ]
             },
             {

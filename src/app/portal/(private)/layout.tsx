@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { LayoutDashboard, FileText, Pill, LogOut, Menu, X, Activity } from 'lucide-react';
+import { LayoutDashboard, FileText, Pill, LogOut, Menu, X, Activity, ClipboardCheck } from 'lucide-react';
 
 export default function PrivateLayout({
     children,
@@ -33,6 +33,7 @@ export default function PrivateLayout({
         { label: 'Resultados', href: '/portal/resultados', icon: Activity },
         { label: 'Historia Clínica', href: '/portal/historia', icon: FileText },
         { label: 'Mis Recetas', href: '/portal/recetas', icon: Pill },
+        { label: 'Próximos Pasos', href: '/portal/indicaciones', icon: ClipboardCheck },
     ];
 
     return (
