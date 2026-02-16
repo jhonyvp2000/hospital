@@ -112,7 +112,7 @@ export const MENU_DATA: MenuCategory[] = [
         ]
     },
     {
-        label: "OTROS / PROFESIONALES",
+        label: "COLABORADORES",
         type: "dropdown",
         items: [
             { title: "Convocatorias CAS", href: "/convocatorias", icon: Briefcase },
