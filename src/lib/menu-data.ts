@@ -53,7 +53,7 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Atención Rápida ⚡",
                 items: [
                     { title: "Reserva de Citas", href: "/citas", icon: Calendar, description: "Agenda tu atención" },
-                    { title: "Telemedicina Express", href: "/telemedicina", icon: Activity, description: "Consulta virtual" },
+                    { title: "Telesalud", href: "/telesalud", icon: Activity, description: "Teleorientación y Teleinterconsulta" },
                     { title: "Admisión Digital", href: "/admision", icon: FileText, description: "Registro anticipado" },
                     { title: "Semáforo de Emergencia", href: "/emergencia", icon: Clock, description: "Tiempo de espera actual" },
                 ]
@@ -115,7 +115,7 @@ export const MENU_DATA: MenuCategory[] = [
         label: "COLABORADORES",
         type: "dropdown",
         items: [
-            { title: "Convocatorias CAS", href: "/convocatorias", icon: Briefcase, description: "Únete al equipo" },
+            { title: "Convocatorias Laborales", href: "/convocatorias", icon: Briefcase, description: "CAS y otros regímenes" },
             { title: "Docencia e Investigación", href: "/docencia", icon: GraduationCap, description: "Internado y residentado" },
             { title: "Citas de Proveedores", href: "/proveedores", icon: Calendar, description: "Gestión de citas" },
             { title: "Intranet del Personal", href: "/intranet", icon: Users, description: "Acceso exclusivo" },
