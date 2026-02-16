@@ -2,7 +2,7 @@ import {
     FileText, Activity, Pill, Calendar, Clock, CreditCard, Shield,
     MapPin, Users, BookOpen, Building, Scale, Newspaper,
     Briefcase, GraduationCap, Link, HeartPulse, Stethoscope, Microscope,
-    Syringe, Baby, Siren, Info
+    Syringe, Baby, Siren, Info, MessageSquare, HelpCircle, ClipboardCheck
 } from 'lucide-react';
 import React from 'react';
 
@@ -50,20 +50,11 @@ export const MENU_DATA: MenuCategory[] = [
                 ]
             },
             {
-                title: "Transparencia 💰",
+                title: "Te Escuchamos 👂",
                 items: [
-                    { title: "Tarifario y Presupuestos", href: "/transparencia/tarifario", icon: CreditCard },
-                    { title: "Cobertura de Seguros", href: "/seguros", icon: Shield },
-                    { title: "Estado de Trámites", href: "/tramites", icon: FileText },
-                ]
-            },
-            {
-                title: "Guía del Paciente 📍",
-                items: [
-                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
-                    { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
-                    { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
-                    { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
+                    { title: "Plataforma PAUS", href: "/paus", icon: MessageSquare, description: "Reclamos y Consultas" },
+                    { title: "Preguntas Frecuentes", href: "/faq", icon: HelpCircle },
+                    { title: "Encuesta de Satisfacción", href: "/encuesta", icon: ClipboardCheck },
                 ]
             }
         ]
@@ -109,6 +100,16 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Salud Mental", href: "/programas/salud-mental", icon: Activity },
                 ]
             }
+        ]
+    },
+    {
+        label: "GUÍA DEL PACIENTE",
+        type: "dropdown",
+        items: [
+            { title: "Staff Médico", href: "/staff-medico", icon: Users },
+            { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
+            { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
+            { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
         ]
     },
     {
