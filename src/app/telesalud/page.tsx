@@ -3,7 +3,7 @@
 import React from 'react';
 import {
     Monitor, Phone, Calendar, Video, Heart,
-    Stethoscope, MessageCcw, Users, CheckCircle,
+    Stethoscope, MessageCircle, Users, CheckCircle,
     Smartphone, Mail
 } from 'lucide-react';
 import Link from 'next/link';
@@ -68,7 +68,7 @@ export default function TelesaludPage() {
 
                     {/* Teleorientación */}
                     <ServiceCard
-                        icon={MessageCcw}
+                        icon={MessageCircle}
                         title="Teleorientación"
                         desc="Consejería y asesoría en salud. Ideal para resolver dudas, consultas preventivas y seguimiento leve."
                         target="Para Pacientes"
