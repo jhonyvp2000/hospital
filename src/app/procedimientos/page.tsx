@@ -104,7 +104,7 @@ const procedures = [
         icon: Activity,
         description: "Imágenes detalladas del interior del cuerpo usando rayos X.",
         details: {
-            whatIsIt: "Escaneo rápido que genera cortes transversales del cuerpo.",
+            whatIsIt: "Escaneo rápido que genera imágenes transversales del cuerpo.",
             benefit: "Detecta tumores, fracturas complejas, hemorragias internas con gran precisión.",
             preparation: "Ayuno de 4 horas si usa contraste. Ropa cómoda sin metales.",
             feeling: "Indoloro. Escucharás zumbidos del equipo. Si usa contraste, podrías sentir calor momentáneo."
@@ -166,8 +166,8 @@ export default function ProcedimientosPage() {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${selectedCategory === cat
-                                    ? 'bg-blue-600 text-white shadow-md transform scale-105'
-                                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                                ? 'bg-blue-600 text-white shadow-md transform scale-105'
+                                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
                                 }`}
                         >
                             {cat}
