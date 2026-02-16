@@ -41,6 +41,15 @@ export const MENU_DATA: MenuCategory[] = [
                 ]
             },
             {
+                title: "Guía del Paciente 📖",
+                items: [
+                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
+                    { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
+                    { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
+                    { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
+                ]
+            },
+            {
                 title: "Atención Rápida ⚡",
                 items: [
                     { title: "Reserva de Citas", href: "/citas", icon: Calendar },
@@ -100,16 +109,6 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Salud Mental", href: "/programas/salud-mental", icon: Activity },
                 ]
             }
-        ]
-    },
-    {
-        label: "GUÍA DEL PACIENTE",
-        type: "dropdown",
-        items: [
-            { title: "Staff Médico", href: "/staff-medico", icon: Users },
-            { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
-            { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
-            { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
         ]
     },
     {
