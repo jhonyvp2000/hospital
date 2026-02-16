@@ -34,27 +34,27 @@ export const MENU_DATA: MenuCategory[] = [
             {
                 title: "Mi Salud 🩺",
                 items: [
-                    { title: "Resultados de Exámenes", href: "/portal/resultados", icon: Activity },
-                    { title: "Mi Historia Clínica", href: "/portal/historia", icon: FileText },
-                    { title: "Mis Recetas", href: "/portal/recetas", icon: Pill },
-                    { title: "Próximos Pasos", href: "/indicaciones", icon: Link },
+                    { title: "Resultados de Exámenes", href: "/portal/resultados", icon: Activity, description: "Consulta y descarga" },
+                    { title: "Mi Historia Clínica", href: "/portal/historia", icon: FileText, description: "Tu historial médico" },
+                    { title: "Mis Recetas", href: "/portal/recetas", icon: Pill, description: "Medicamentos pendientes" },
+                    { title: "Próximos Pasos", href: "/indicaciones", icon: Link, description: "Indicaciones médicas" },
                 ]
             },
             {
                 title: "Guía del Paciente 📖",
                 items: [
-                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
-                    { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen },
-                    { title: "Mapa del Hospital", href: "/mapa", icon: MapPin },
-                    { title: "Derechos y Deberes", href: "/derechos", icon: Scale },
+                    { title: "Staff Médico", href: "/staff-medico", icon: Users, description: "Nuestros especialistas" },
+                    { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen, description: "Preparación y detalles" },
+                    { title: "Mapa del Hospital", href: "/mapa", icon: MapPin, description: "Ubícate en el hospital" },
+                    { title: "Derechos y Deberes", href: "/derechos", icon: Scale, description: "Conoce tus derechos" },
                 ]
             },
             {
                 title: "Atención Rápida ⚡",
                 items: [
-                    { title: "Reserva de Citas", href: "/citas", icon: Calendar },
-                    { title: "Telemedicina Express", href: "/telemedicina", icon: Activity },
-                    { title: "Admisión Digital", href: "/admision", icon: FileText },
+                    { title: "Reserva de Citas", href: "/citas", icon: Calendar, description: "Agenda tu atención" },
+                    { title: "Telemedicina Express", href: "/telemedicina", icon: Activity, description: "Consulta virtual" },
+                    { title: "Admisión Digital", href: "/admision", icon: FileText, description: "Registro anticipado" },
                     { title: "Semáforo de Emergencia", href: "/emergencia", icon: Clock, description: "Tiempo de espera actual" },
                 ]
             },
@@ -62,8 +62,8 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Te Escuchamos 👂",
                 items: [
                     { title: "Plataforma PAUS", href: "/paus", icon: MessageSquare, description: "Reclamos y Consultas" },
-                    { title: "Preguntas Frecuentes", href: "/faq", icon: HelpCircle },
-                    { title: "Encuesta de Satisfacción", href: "/encuesta", icon: ClipboardCheck },
+                    { title: "Preguntas Frecuentes", href: "/faq", icon: HelpCircle, description: "Respuestas directas" },
+                    { title: "Encuesta de Satisfacción", href: "/encuesta", icon: ClipboardCheck, description: "Ayúdanos a mejorar" },
                 ]
             }
         ]
@@ -76,10 +76,10 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Nuestra Identidad 🏥",
                 items: [
                     { title: "Quiénes Somos", href: "/nosotros", icon: Building, description: "Historia, Misión y Visión" },
-                    { title: "Staff Médico", href: "/staff-medico", icon: Users },
-                    { title: "Organigrama", href: "/organigrama", icon: Activity },
-                    { title: "Directorio Institucional", href: "/directorio", icon: Users },
-                    { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin },
+                    { title: "Staff Médico", href: "/staff-medico", icon: Users, description: "Equipo de profesionales" },
+                    { title: "Organigrama", href: "/organigrama", icon: Activity, description: "Estructura interna" },
+                    { title: "Directorio Institucional", href: "/directorio", icon: Users, description: "Altos funcionarios" },
+                    { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin, description: "Cómo llegar" },
                 ]
             },
             {
@@ -87,26 +87,26 @@ export const MENU_DATA: MenuCategory[] = [
                 items: [
                     { title: "Portal de Transparencia", href: "/transparencia", icon: Shield, description: "Acceso a información pública" },
                     { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
-                    { title: "Normatividad", href: "/normatividad", icon: Scale },
-                    { title: "Sala de Prensa", href: "/sala-de-prensa", icon: Newspaper },
+                    { title: "Normatividad", href: "/normatividad", icon: Scale, description: "Leyes y reglamentos" },
+                    { title: "Sala de Prensa", href: "/sala-de-prensa", icon: Newspaper, description: "Noticias y comunicados" },
                 ]
             },
             {
                 title: "Cartera de Servicios 💉",
                 items: [
-                    { title: "Consulta Externa", href: "/servicios/consulta", icon: Stethoscope },
-                    { title: "Emergencia y UCI", href: "/servicios/emergencia", icon: Siren },
-                    { title: "Centro Quirúrgico", href: "/servicios/cirugia", icon: HeartPulse },
-                    { title: "Ayuda al Diagnóstico", href: "/servicios/diagnostico", icon: Microscope, description: "Laboratorio, Rayos X, Banco de Sangre" },
+                    { title: "Consulta Externa", href: "/servicios/consulta", icon: Stethoscope, description: "Especialidades médicas" },
+                    { title: "Emergencia y UCI", href: "/servicios/emergencia", icon: Siren, description: "Atención 24/7" },
+                    { title: "Centro Quirúrgico", href: "/servicios/cirugia", icon: HeartPulse, description: "Salas de operaciones" },
+                    { title: "Ayuda al Diagnóstico", href: "/servicios/diagnostico", icon: Microscope, description: "Laboratorio, Rayos X" },
                 ]
             },
             {
                 title: "Programas Estratégicos 🎗️",
                 items: [
-                    { title: "Materno Neonatal", href: "/programas/materno", icon: Baby },
-                    { title: "TBC y VIH", href: "/programas/tbc-vih", icon: Pill },
+                    { title: "Materno Neonatal", href: "/programas/materno", icon: Baby, description: "Cuidado mamá y bebé" },
+                    { title: "TBC y VIH", href: "/programas/tbc-vih", icon: Pill, description: "Prevención y control" },
                     { title: "Enfermedades Metaxénicas", href: "/programas/dengue", icon: Info, description: "Dengue, Zika, Chikungunya" },
-                    { title: "Salud Mental", href: "/programas/salud-mental", icon: Activity },
+                    { title: "Salud Mental", href: "/programas/salud-mental", icon: Activity, description: "Bienestar emocional" },
                 ]
             }
         ]
@@ -115,10 +115,10 @@ export const MENU_DATA: MenuCategory[] = [
         label: "COLABORADORES",
         type: "dropdown",
         items: [
-            { title: "Convocatorias CAS", href: "/convocatorias", icon: Briefcase },
-            { title: "Docencia e Investigación", href: "/docencia", icon: GraduationCap },
-            { title: "Citas de Proveedores", href: "/proveedores", icon: Calendar },
-            { title: "Intranet del Personal", href: "/intranet", icon: Users },
+            { title: "Convocatorias CAS", href: "/convocatorias", icon: Briefcase, description: "Únete al equipo" },
+            { title: "Docencia e Investigación", href: "/docencia", icon: GraduationCap, description: "Internado y residentado" },
+            { title: "Citas de Proveedores", href: "/proveedores", icon: Calendar, description: "Gestión de citas" },
+            { title: "Intranet del Personal", href: "/intranet", icon: Users, description: "Acceso exclusivo" },
         ]
     }
 ];

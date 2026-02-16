@@ -59,11 +59,16 @@ export default function MegaMenu({ category, isOpen, onClose }: MegaMenuProps) {
                                 <li key={idx}>
                                     <Link
                                         href={item.href}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-hospital-bg text-gray-700 hover:text-hospital-blue transition-colors"
+                                        className="flex items-start gap-3 px-4 py-3 rounded-md hover:bg-hospital-bg text-gray-700 hover:text-hospital-blue transition-colors"
                                         onClick={onClose}
                                     >
-                                        {item.icon && <item.icon className="w-4 h-4" />}
-                                        {item.title}
+                                        {item.icon && <item.icon className="w-4 h-4 mt-0.5 shrink-0" />}
+                                        <div>
+                                            <span className="block font-medium text-sm">{item.title}</span>
+                                            {item.description && (
+                                                <span className="block text-xs text-gray-500 mt-0.5">{item.description}</span>
+                                            )}
+                                        </div>
                                     </Link>
                                 </li>
                             ))}
