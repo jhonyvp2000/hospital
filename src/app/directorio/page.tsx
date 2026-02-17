@@ -11,6 +11,7 @@ const DIRECTORY_DATA = [
         department: "Dirección General",
         email: "direccion@hospitaltarapoto.gob.pe",
         phone: "(042) 522 133",
+        agendaUrl: "https://visitas.servicios.gob.pe/agenda/main-agenda-pte.php?ruc=20494013453",
         image: null // Placeholder for now
     },
     {
@@ -20,7 +21,6 @@ const DIRECTORY_DATA = [
         department: "Dirección Hospitalaria",
         email: "director.hospital@hospitaltarapoto.gob.pe",
         phone: "(042) 522 133 Anexo 101",
-        agendaUrl: "https://visitas.servicios.gob.pe/agenda/main-agenda-pte.php?ruc=20494013453",
         image: null
     },
     {
