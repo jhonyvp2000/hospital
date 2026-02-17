@@ -209,7 +209,7 @@ export default function EmergenciaUCIPage() {
                                     <MapPin className="text-primary" />
                                     <div>
                                         <p className="text-xs text-neutral-500 font-bold uppercase">Ingreso Diferenciado</p>
-                                        <p className="text-lg font-bold text-neutral-800">Jr. Washington 123 - Puerta 2</p>
+                                        <p className="font-bold text-neutral-800">Jr. Augusto B. Leguia 503 - Tarapoto</p>
                                     </div>
                                 </div>
                             </div>
