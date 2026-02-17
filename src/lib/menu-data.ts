@@ -45,7 +45,7 @@ export const MENU_DATA: MenuCategory[] = [
                 items: [
                     { title: "Staff Médico", href: "/staff-medico", icon: Users, description: "Nuestros especialistas" },
                     { title: "Guía de Procedimientos", href: "/procedimientos", icon: BookOpen, description: "Preparación y detalles" },
-                    { title: "Mapa del Hospital", href: "/mapa", icon: MapPin, description: "Ubícate en el hospital" },
+
                     { title: "Derechos y Deberes", href: "/derechos", icon: Scale, description: "Conoce tus derechos" },
                 ]
             },
