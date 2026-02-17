@@ -44,9 +44,9 @@ export default function TelesaludPage() {
                                 <Video className="w-32 h-32 text-hospital-blue" />
                                 <div className="absolute inset-x-0 bottom-0 bg-gray-50 p-4 text-center rounded-b-3xl">
                                     <p className="font-bold text-gray-800">Conexión Segura</p>
-                                    <p className="text-xs text-green-500 flex items-center justify-center gap-1">
+                                    <div className="text-xs text-green-500 flex items-center justify-center gap-1">
                                         <div className="w-2 h-2 bg-green-500 rounded-full"></div> En línea
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
