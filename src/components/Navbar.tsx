@@ -37,9 +37,9 @@ export default function Navbar() {
                         <span className="flex items-center gap-1 font-medium text-hospital-blue">
                             <Phone className="w-3 h-3" /> Emergencias: 106
                         </span>
-                        <a href="/portal-paciente" className="flex items-center gap-1 hover:text-hospital-blue">
+                        <Link href="/portal/login" className="flex items-center gap-1 hover:text-hospital-blue">
                             <User className="w-3 h-3" /> Portal Paciente
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
