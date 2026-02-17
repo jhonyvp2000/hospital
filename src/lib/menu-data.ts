@@ -52,9 +52,8 @@ export const MENU_DATA: MenuCategory[] = [
             {
                 title: "Atención Rápida ⚡",
                 items: [
-                    { title: "Reserva de Citas", href: "/citas", icon: Calendar, description: "Agenda tu atención" },
+                    { title: "Citas y Referencias", href: "/citas", icon: Calendar, description: "Solicitud y Orientación" },
                     { title: "Telesalud", href: "/telesalud", icon: Activity, description: "Teleorientación y Teleinterconsulta" },
-                    { title: "Admisión Digital", href: "/admision", icon: FileText, description: "Registro anticipado" },
                     { title: "Semáforo de Emergencia", href: "/emergencia", icon: Clock, description: "Tiempo de espera actual" },
                 ]
             },
