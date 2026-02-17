@@ -118,7 +118,7 @@ export const MENU_DATA: MenuCategory[] = [
         items: [
             { title: "Convocatorias Laborales", href: "/convocatorias", icon: Briefcase, description: "CAS y otros regímenes" },
             { title: "Docencia e Investigación", href: "/docencia", icon: GraduationCap, description: "Internado y residentado" },
-            { title: "Citas de Proveedores", href: "/proveedores", icon: Calendar, description: "Gestión de citas" },
+
             { title: "Intranet del Personal", href: "/intranet", icon: Users, description: "Acceso exclusivo" },
         ]
     }
