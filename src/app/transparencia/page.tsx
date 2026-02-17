@@ -59,7 +59,7 @@ export default function TransparenciaPage() {
             icon: Calendar,
             description: "Agenda de la Dirección y comunicados oficiales.",
             color: "bg-indigo-600",
-            href: "#"
+            href: "https://visitas.servicios.gob.pe/agenda/main-agenda-pte.php?ruc=20494013453"
         },
         {
             title: "Acceso a la Información",

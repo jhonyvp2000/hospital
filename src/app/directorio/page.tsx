@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Mail, Phone, Users, MapPin, Search, Filter, Award } from 'lucide-react';
+import { User, Mail, Phone, Users, MapPin, Search, Filter, Award, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 // Mock Data based on real authorities found in research
@@ -20,6 +20,7 @@ const DIRECTORY_DATA = [
         department: "Dirección Hospitalaria",
         email: "director.hospital@hospitaltarapoto.gob.pe",
         phone: "(042) 522 133 Anexo 101",
+        agendaUrl: "https://visitas.servicios.gob.pe/agenda/main-agenda-pte.php?ruc=20494013453",
         image: null
     },
     {
@@ -141,6 +142,13 @@ export default function DirectoryPage() {
                                             <Phone className="w-4 h-4 shrink-0 group-hover/link:text-hospital-light" />
                                             <span className="break-words">{person.phone}</span>
                                         </a>
+                                        {/* @ts-ignore */}
+                                        {person.agendaUrl && (
+                                            <a href={person.agendaUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-sm text-hospital-blue font-bold hover:underline transition-colors pt-2 border-t border-gray-100">
+                                                <Calendar className="w-4 h-4 shrink-0" />
+                                                Ver Agenda Oficial
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </div>
