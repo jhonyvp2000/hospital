@@ -89,6 +89,7 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
                     { title: "Indicadores de Gestión", href: "/gestion/indicadores", icon: Activity, description: "Producción y Calidad" },
                     { title: "Normatividad", href: "/normatividad", icon: Scale, description: "Leyes y reglamentos" },
+                    { title: "Sala Situacional", href: "/gestion/sala-situacional", icon: Activity, description: "Vigilancia Epidemiológica" },
                     { title: "Sala de Prensa", href: "/sala-de-prensa", icon: Newspaper, description: "Noticias y comunicados" },
                 ]
             },
