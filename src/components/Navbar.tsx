@@ -67,19 +67,28 @@ export default function Navbar() {
                                 <li
                                     key={category.label}
                                     className="h-full flex items-center"
-                                    onMouseEnter={() => handleMouseEnter(category.label)}
+                                    onMouseEnter={() => category.type !== 'link' && handleMouseEnter(category.label)}
                                 >
-                                    <button
-                                        className={`
-                      px-5 py-2 font-medium transition-colors rounded-full
-                      ${activeCategory === category.label
-                                                ? 'bg-hospital-bg text-hospital-blue'
-                                                : 'text-gray-600 hover:text-hospital-blue hover:bg-gray-50'
-                                            }
-                    `}
-                                    >
-                                        {category.label}
-                                    </button>
+                                    {category.type === 'link' ? (
+                                        <Link
+                                            href={category.href || "/"}
+                                            className="px-5 py-2 font-medium text-gray-600 hover:text-hospital-blue hover:bg-gray-50 transition-colors rounded-full"
+                                        >
+                                            {category.label}
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            className={`
+                                                px-5 py-2 font-medium transition-colors rounded-full
+                                                ${activeCategory === category.label
+                                                    ? 'bg-hospital-bg text-hospital-blue'
+                                                    : 'text-gray-600 hover:text-hospital-blue hover:bg-gray-50'
+                                                }
+                                            `}
+                                        >
+                                            {category.label}
+                                        </button>
+                                    )}
                                 </li>
                             ))}
                         </ul>

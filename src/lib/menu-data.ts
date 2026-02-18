@@ -29,6 +29,11 @@ export type MenuCategory = {
 
 export const MENU_DATA: MenuCategory[] = [
     {
+        label: "INICIO",
+        type: "link",
+        href: "/"
+    },
+    {
         label: "USUARIOS",
         type: "mega",
         columns: [
