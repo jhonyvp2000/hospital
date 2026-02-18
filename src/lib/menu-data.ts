@@ -76,7 +76,7 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Nuestra Identidad 🏥",
                 items: [
                     { title: "Quiénes Somos", href: "/nosotros", icon: Building, description: "Historia, Misión y Visión" },
-                    { title: "Staff Médico", href: "/staff-medico", icon: Users, description: "Equipo de profesionales" },
+
                     { title: "Organigrama", href: "/organigrama", icon: Activity, description: "Estructura interna" },
                     { title: "Directorio Institucional", href: "/directorio", icon: Users, description: "Altos funcionarios" },
                     { title: "Ubicación y Contacto", href: "/contacto", icon: MapPin, description: "Cómo llegar" },
