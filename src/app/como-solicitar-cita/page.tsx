@@ -22,7 +22,7 @@ export default function HowToRequestAppointment() {
                         El sistema de salud en Perú (MINSA) funciona bajo un modelo de redes integradas, donde no todos los establecimientos pueden atender todo tipo de casos. Para ordenar esto, existe el <span className="font-bold text-hospital-blue">Sistema de Referencia y Contrarreferencia</span>.
                     </p>
                     <p className="text-gray-700 text-lg leading-relaxed mt-4">
-                        Aquí te detallamos cómo funciona este flujo, específicamente desde una posta médica (Primer Nivel) hacia un hospital referencial (Segundo o Tercer Nivel) como nosotros.
+                        Aquí te detallamos cómo funciona este flujo, específicamente desde un establecimiento de primer nivel (posta médica, etc) hacia un hospital referencial (Segundo o Tercer Nivel) como nosotros.
                     </p>
                 </div>
 
