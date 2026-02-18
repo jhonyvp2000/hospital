@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import Navbar from "@/components/Navbar";
+import ServicePortfolio from "@/components/ServicePortfolio";
 
 export default function Home() {
   return (
@@ -22,26 +23,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-hospital-bg">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-hospital-blue mb-8 text-center">Servicios Destacados</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Service Cards will go here */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Consulta Externa</h3>
-              <p className="text-gray-600">Atención especializada en más de 20 especialidades médicas.</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Laboratorio</h3>
-              <p className="text-gray-600">Resultados rápidos y confiables con tecnología de punta.</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Emergencia 24/7</h3>
-              <p className="text-gray-600">Atención inmediata para casos críticos de alta complejidad.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServicePortfolio />
     </main>
   );
 }
