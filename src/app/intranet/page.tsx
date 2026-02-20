@@ -5,17 +5,38 @@ import { User, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { signIn } from 'next-auth/react';
+
 export default function IntranetLoginPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [dni, setDni] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        // Simulación de login
-        setTimeout(() => {
-            router.push('/intranet/dashboard');
-        }, 1500);
+        setError('');
+
+        try {
+            const res = await signIn('credentials', {
+                dni,
+                password,
+                redirect: false, // Prevent NextAuth default redirect
+            });
+
+            if (res?.error) {
+                setError('Credenciales incorrectas o usuario no encontrado');
+                setLoading(false);
+            } else {
+                // Success
+                router.push('/intranet/dashboard');
+            }
+        } catch (error) {
+            setError('Ocurrió un error inesperado al conectar.');
+            setLoading(false);
+        }
     };
 
     return (
@@ -52,6 +73,12 @@ export default function IntranetLoginPage() {
                 <div className="w-full md:w-1/2 p-12">
                     <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Iniciar Sesión</h2>
 
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm">
+                            {error}
+                        </div>
+                    )}
+
                     <form onSubmit={handleLogin} className="space-y-6">
                         <div>
                             <label className="block text-sm font-bold text-gray-700 mb-2">Usuario / DNI</label>
@@ -61,8 +88,10 @@ export default function IntranetLoginPage() {
                                 </div>
                                 <input
                                     type="text"
+                                    value={dni}
+                                    onChange={(e) => setDni(e.target.value)}
                                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-hospital-light focus:border-transparent outline-none transition-all"
-                                    placeholder="Ingrese su usuario"
+                                    placeholder="Ingrese su usuario o DNI"
                                     required
                                 />
                             </div>
@@ -76,6 +105,8 @@ export default function IntranetLoginPage() {
                                 </div>
                                 <input
                                     type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-hospital-light focus:border-transparent outline-none transition-all"
                                     placeholder="••••••••"
                                     required
@@ -97,7 +128,7 @@ export default function IntranetLoginPage() {
                             className={`w-full bg-hospital-blue text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                         >
                             {loading ? (
-                                <span>Ingresando...</span>
+                                <span>Autenticando...</span>
                             ) : (
                                 <>
                                     Ingresar al Sistema <ArrowRight className="w-5 h-5" />
