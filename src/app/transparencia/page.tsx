@@ -38,7 +38,7 @@ export default function TransparenciaPage() {
             icon: HardHat,
             description: "Cartera de proyectos y avances de obras públicas.",
             color: "bg-orange-600",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/reportes_directos/pte_transparencia_proyectos.aspx?id_entidad=145&id_tema=26&ver=D"
         },
         {
             title: "Personal",
