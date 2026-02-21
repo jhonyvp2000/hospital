@@ -45,7 +45,7 @@ export default function TransparenciaPage() {
             icon: Users,
             description: "Relación de personal Nombrado, CAS y dietas.",
             color: "bg-purple-600",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/personal/pte_transparencia_personal_inicio.aspx?id_entidad=145&id_tema=32&ver=D"
         },
         {
             title: "Contrataciones",
