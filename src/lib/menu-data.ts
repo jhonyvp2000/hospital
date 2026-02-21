@@ -1,9 +1,9 @@
 import {
-    FileText, Activity, Pill, Calendar, Clock, CreditCard, Shield,
+    FileText, Activity, Pill, Calendar, Clock,
     MapPin, Users, BookOpen, Building, Scale, Newspaper,
     Briefcase, GraduationCap, Link, HeartPulse, Stethoscope, Microscope,
     Heart, TestTube,
-    Syringe, Baby, Siren, Info, MessageSquare, HelpCircle, ClipboardCheck
+    Baby, Siren, Info, MessageSquare, HelpCircle, ClipboardCheck, Shield
 } from 'lucide-react';
 import React from 'react';
 

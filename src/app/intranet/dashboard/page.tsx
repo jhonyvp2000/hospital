@@ -92,7 +92,9 @@ export default function IntranetDashboardPage() {
 
                     {/* Module: Recursos Humanos */}
                     <DashboardCard title="Gestión de RR.HH.">
-                        <MenuItem icon={FileText} text="Boletas de Pago" subtext="Descarga tus recibos digitales" />
+                        <Link href="/intranet/dashboard/convocatorias">
+                            <MenuItem icon={FileText} text="Convocatorias CAS" subtext="Registra procesos de selección" active />
+                        </Link>
                         <MenuItem icon={User} text="Mi Legajo Digital" subtext="Resoluciones y contratos" />
                         <MenuItem icon={Clock} text="Marcaciones" subtext="Historial de asistencia" />
                         <MenuItem icon={Calendar} text="Solicitud de Vacaciones" subtext="Programación anual" />
@@ -118,7 +120,7 @@ export default function IntranetDashboardPage() {
     );
 }
 
-function DashboardCard({ title, children }: any) {
+function DashboardCard({ title, children }: { title: string, children: React.ReactNode }) {
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
             <div className="bg-gray-50 px-6 py-4 border-b border-gray-100">
@@ -131,7 +133,7 @@ function DashboardCard({ title, children }: any) {
     )
 }
 
-function MenuItem({ icon: Icon, text, subtext, badge, active }: any) {
+function MenuItem({ icon: Icon, text, subtext, badge, active }: { icon: React.ElementType, text: string, subtext: string, badge?: string, active?: boolean }) {
     return (
         <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-blue-50 cursor-pointer transition-colors group">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${active ? 'bg-hospital-blue text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-hospital-blue'}`}>

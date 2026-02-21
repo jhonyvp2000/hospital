@@ -3,14 +3,23 @@ import postgres from 'postgres';
 import * as schema from './schema';
 import * as dotenv from 'dotenv';
 
-dotenv.config(); // Ensure env vars are loaded
+dotenv.config();
 
-const connectionString = process.env.DATABASE_URL;
+let globalDb: any = null;
 
-if (!connectionString) {
-    throw new Error('DATABASE_URL is missing in environment variables');
+// Ensure database is only connected when actually queried at runtime
+function getDb() {
+    if (globalDb) return globalDb;
+
+    const connectionString = process.env.DATABASE_URL || "postgresql://jvp_user:V3l4p4r3d3s@178.156.220.22:6432/control";
+    const client = postgres(connectionString, { prepare: false });
+    globalDb = drizzle(client, { schema });
+    return globalDb;
 }
 
-// Disable prefetch as it is not supported for "Transaction" pool mode
-export const client = postgres(connectionString, { prepare: false });
-export const db = drizzle(client, { schema });
+export const db = new Proxy({} as any, {
+    get: (target, prop) => {
+        const actualDb = getDb();
+        return actualDb[prop];
+    }
+});
