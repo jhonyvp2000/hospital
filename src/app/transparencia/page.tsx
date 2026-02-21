@@ -134,9 +134,9 @@ export default function TransparenciaPage() {
                                 ¿No encuentra lo que busca? Puede presentar una solicitud virtual de acceso a la información pública. Atendemos en un plazo máximo de 10 días hábiles.
                             </p>
                         </div>
-                        <button className="flex items-center gap-2 text-rose-600 font-bold hover:gap-3 transition-all">
+                        <a href="https://www.transparencia.gob.pe/reportes_directos/pep_transparencia_acceso_informacion.aspx?id_entidad=18792&id_tema=49&cod_rueep=0&ver=" target="_blank" rel="noopener noreferrer" className="flex items-center w-fit gap-2 text-rose-600 font-bold hover:gap-3 transition-all">
                             Presentar Solicitud <ArrowRight className="w-4 h-4" />
-                        </button>
+                        </a>
                     </div>
 
                     {/* Standard Rubros */}
