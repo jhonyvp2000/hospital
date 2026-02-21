@@ -24,7 +24,7 @@ export default function TransparenciaPage() {
             icon: FileText,
             description: "ROF, MOF, Organigrama y Planes Operativos (POI).",
             color: "bg-emerald-600",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=18792&id_tema=5&ver=D"
         },
         {
             title: "Presupuesto",
