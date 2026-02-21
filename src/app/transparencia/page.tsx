@@ -17,7 +17,7 @@ export default function TransparenciaPage() {
             icon: Building,
             description: "Directorio, Marco Legal y normas emitidas.",
             color: "bg-blue-600",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=18792&id_tema=1&ver="
         },
         {
             title: "Planeamiento y Organización",
