@@ -31,7 +31,7 @@ export default function TransparenciaPage() {
             icon: PiggyBank,
             description: "Presupuesto anual (PIA/PIM) y ejecución del gasto.",
             color: "bg-amber-500",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/reportes_directos/pte_transparencia_info_finan.aspx?id_entidad=145&id_tema=19&ver=D"
         },
         {
             title: "Proyectos de Inversión",
@@ -140,21 +140,45 @@ export default function TransparenciaPage() {
                     </div>
 
                     {/* Standard Rubros */}
-                    {RUBROS.filter(r => r.title !== "Acceso a la Información").map((rubro, idx) => (
-                        <Link
-                            href={rubro.href}
-                            key={idx}
-                            className="bg-white rounded-xl shadow-md border border-gray-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all group"
-                        >
-                            <div className={`w-10 h-10 ${rubro.color} text-white rounded-lg flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform`}>
-                                <rubro.icon className="w-5 h-5" />
-                            </div>
-                            <h3 className="font-bold text-gray-800 mb-2 group-hover:text-blue-700 transition-colors">{rubro.title}</h3>
-                            <p className="text-xs text-gray-500 leading-relaxed">
-                                {rubro.description}
-                            </p>
-                        </Link>
-                    ))}
+                    {RUBROS.filter(r => r.title !== "Acceso a la Información").map((rubro, idx) => {
+                        const isExternal = rubro.href.startsWith('http');
+
+                        const CardContent = (
+                            <>
+                                <div className={`w-10 h-10 ${rubro.color} text-white rounded-lg flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform`}>
+                                    <rubro.icon className="w-5 h-5" />
+                                </div>
+                                <h3 className="font-bold text-gray-800 mb-2 group-hover:text-blue-700 transition-colors">{rubro.title}</h3>
+                                <p className="text-xs text-gray-500 leading-relaxed">
+                                    {rubro.description}
+                                </p>
+                            </>
+                        );
+
+                        if (isExternal) {
+                            return (
+                                <a
+                                    key={idx}
+                                    href={rubro.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white rounded-xl shadow-md border border-gray-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all group"
+                                >
+                                    {CardContent}
+                                </a>
+                            );
+                        }
+
+                        return (
+                            <Link
+                                key={idx}
+                                href={rubro.href}
+                                className="bg-white rounded-xl shadow-md border border-gray-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all group"
+                            >
+                                {CardContent}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
 
