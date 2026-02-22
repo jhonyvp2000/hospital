@@ -91,6 +91,7 @@ export const MENU_DATA: MenuCategory[] = [
                 title: "Gestión y Transparencia 📋",
                 items: [
                     { title: "Portal de Transparencia", href: "/transparencia", icon: Shield, description: "Acceso a información pública" },
+                    { title: "Contrataciones", href: "https://www.transparencia.gob.pe/contrataciones/pte_transparencia_contrataciones.aspx?id_entidad=145&id_tema=34&ver=D", icon: Briefcase, description: "Adquisiciones y compras del Estado" },
                     { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
                     { title: "Indicadores de Gestión", href: "/gestion/indicadores", icon: Activity, description: "Producción y Calidad" },
                     { title: "Normatividad", href: "/normatividad", icon: Scale, description: "Leyes y reglamentos" },

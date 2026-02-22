@@ -52,14 +52,14 @@ export default function TransparenciaPage() {
             icon: ShoppingCart,
             description: "Órdenes de Compra, Servicio y procesos de selección.",
             color: "bg-cyan-600",
-            href: "#"
+            href: "https://www.transparencia.gob.pe/contrataciones/pte_transparencia_contrataciones.aspx?id_entidad=145&id_tema=34&ver=D"
         },
         {
             title: "Actividades Oficiales",
             icon: Calendar,
             description: "Agenda de la Dirección y comunicados oficiales.",
             color: "bg-indigo-600",
-            href: "https://visitas.servicios.gob.pe/agenda/main-agenda-pte.php?ruc=20494013453"
+            href: "https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=145&id_tema=40&ver=D"
         },
         {
             title: "Acceso a la Información",
@@ -73,14 +73,14 @@ export default function TransparenciaPage() {
             icon: Eye,
             description: "Registro de visitas a funcionarios públicos.",
             color: "bg-teal-600",
-            href: "https://visitas.servicios.gob.pe/" // Official link usually used
+            href: "https://www.transparencia.gob.pe/reportes_directos/pte_transparencia_reg_visitas.aspx?id_entidad=145&ver=D&id_tema=500"
         },
         {
             title: "Normas Emitidas",
             icon: BookOpen,
             description: "Resoluciones Directorales y administrativa.",
             color: "bg-slate-600",
-            href: "#"
+            href: "https://www.gob.pe/institucion/ogess-ear-ht/normas-legales"
         }
     ];
 
