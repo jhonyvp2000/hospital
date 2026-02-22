@@ -21,6 +21,7 @@ export async function GET(request: Request) {
             title: jobPostings.title,
             code: jobPostings.code,
             regime: jobPostings.regime,
+            department: jobPostings.department,
             vacancies: jobPostings.vacancies,
             status: jobPostings.status,
             publicationDate: jobPostings.publicationDate,
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        const { title, code, regime, vacancies, description, salary, status } = body;
+        const { title, code, regime, department, vacancies, description, salary, status } = body;
 
         // Basic validation
         if (!title || !code || !regime || !vacancies || !description) {
@@ -63,6 +64,7 @@ export async function POST(request: Request) {
             title,
             code,
             regime,
+            department,
             vacancies,
             description,
             salary,

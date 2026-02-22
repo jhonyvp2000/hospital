@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
     Briefcase, Search, FileSignature,
@@ -7,41 +9,39 @@ import {
     Clock, ArrowRight, Bell, FileText
 } from 'lucide-react';
 
-// Mock data para convocatorias vigentes
-const CONVOCATORIAS_VIGENTES = [
-    {
-        id: 'CAS-005-2024',
-        title: 'Médico Especialista en Emergencias y Desastres',
-        regime: 'CAS',
-        vacancies: 2,
-        department: 'Departamento de Emergencia y Cuidados Críticos',
-        status: 'Vigente',
-        endDate: '2024-06-15',
-        basesUrl: '#'
-    },
-    {
-        id: 'CAS-006-2024',
-        title: 'Licenciado(a) en Enfermería Especialista en Centro Quirúrgico',
-        regime: 'CAS',
-        vacancies: 4,
-        department: 'Centro Quirúrgico',
-        status: 'Vigente',
-        endDate: '2024-06-18',
-        basesUrl: '#'
-    },
-    {
-        id: 'TERC-012-2024',
-        title: 'Servicio de Mantenimiento Preventivo de Equipos Biomédicos',
-        regime: 'Terceros',
-        vacancies: 1,
-        department: 'Unidad de Servicios Generales y Mantenimiento',
-        status: 'En Evaluación',
-        endDate: '2024-05-30',
-        basesUrl: '#'
-    }
-];
+interface PublicJob {
+    id: string;
+    title: string;
+    code: string;
+    regime: string;
+    department: string;
+    vacancies: string;
+    status: string;
+    endDate: string | null;
+}
 
 export default function ConvocatoriasPage() {
+    const [jobs, setJobs] = useState<PublicJob[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                // Using a public endpoint that we will create now
+                const res = await fetch('/api/jobs');
+                if (res.ok) {
+                    const data = await res.json();
+                    setJobs(data);
+                }
+            } catch (error) {
+                console.error("Error fetching jobs", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchJobs();
+    }, []);
+
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
 
@@ -170,46 +170,53 @@ export default function ConvocatoriasPage() {
                     </div>
 
                     <div className="divide-y divide-gray-100">
-                        {CONVOCATORIAS_VIGENTES.map((item, idx) => (
-                            <div key={idx} className="p-6 md:p-8 hover:bg-gray-50/50 transition-colors flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center group">
-
-                                <div className="flex-1 w-full">
-                                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${item.status === 'Vigente' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
-                                            }`}>
-                                            {item.status}
-                                        </span>
-                                        <span className="text-gray-500 font-mono text-sm font-semibold">{item.id}</span>
-                                        <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">{item.regime}</span>
-                                    </div>
-
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-700 transition-colors">
-                                        {item.title}
-                                    </h3>
-
-                                    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
-                                        <span className="flex items-center gap-1.5"><MapPin size={16} /> {item.department}</span>
-                                        <span className="flex items-center gap-1.5"><Users size={16} /> {item.vacancies} Plaza(s)</span>
-                                        <span className="flex items-center gap-1.5 text-red-500 font-medium"><Clock size={16} /> Cierre: {item.endDate}</span>
-                                    </div>
-                                </div>
-
-                                <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-3">
-                                    <button className="flex-1 sm:flex-none bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-700 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                                        <FileText size={18} /> Bases
-                                    </button>
-                                    <button className="flex-1 sm:flex-none bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                                        Postular <ChevronRight size={18} />
-                                    </button>
-                                </div>
+                        {loading ? (
+                            <div className="p-12 text-center text-gray-500 flex flex-col items-center">
+                                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-4"></div>
+                                <p>Cargando convocatorias...</p>
                             </div>
-                        ))}
-
-                        {CONVOCATORIAS_VIGENTES.length === 0 && (
+                        ) : jobs.length === 0 ? (
                             <div className="p-12 text-center text-gray-500">
                                 <Briefcase size={48} className="mx-auto text-gray-300 mb-4" />
                                 <p className="text-lg">No hay convocatorias vigentes en este momento.</p>
                             </div>
+                        ) : (
+                            jobs.map((item) => (
+                                <div key={item.id} className="p-6 md:p-8 hover:bg-gray-50/50 transition-colors flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center group">
+
+                                    <div className="flex-1 w-full">
+                                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${item.status === 'PUBLISHED' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+                                                }`}>
+                                                {item.status === 'PUBLISHED' ? 'Vigente' : 'En Evaluación'}
+                                            </span>
+                                            <span className="text-gray-500 font-mono text-sm font-semibold">{item.code}</span>
+                                            <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">{item.regime}</span>
+                                        </div>
+
+                                        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-700 transition-colors">
+                                            {item.title}
+                                        </h3>
+
+                                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
+                                            <span className="flex items-center gap-1.5"><MapPin size={16} /> {item.department || 'Dirección General'}</span>
+                                            <span className="flex items-center gap-1.5"><Users size={16} /> {item.vacancies} Plaza(s)</span>
+                                            {item.endDate && (
+                                                <span className="flex items-center gap-1.5 text-red-500 font-medium"><Clock size={16} /> Cierre: {new Date(item.endDate).toLocaleDateString('es-PE')}</span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-3">
+                                        <Link href={`/convocatorias/${item.id}`} className="flex-1 sm:flex-none bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-700 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                                            <FileText size={18} /> Bases
+                                        </Link>
+                                        <Link href={`/convocatorias/${item.id}`} className="flex-1 sm:flex-none bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                                            Postular <ChevronRight size={18} />
+                                        </Link>
+                                    </div>
+                                </div>
+                            ))
                         )}
                     </div>
 

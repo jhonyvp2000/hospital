@@ -1,34 +1,22 @@
 import postgres from 'postgres';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+dotenv.config({ path: '.env.local' });
+dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, '../../.env.local') });
+const sql = postgres(process.env.DATABASE_URL || 'postgresql://jvp_user:V3l4p4r3d3s@178.156.220.22:6432/control');
 
 async function run() {
-    console.log("Connecting to:", process.env.DATABASE_URL?.split('@')[1]); // Log domain safe info
-
-    if (!process.env.DATABASE_URL) {
-        throw new Error("Missing DATABASE_URL");
-    }
-
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
-
     try {
-        console.log("Altering job_postings to add current_stage...");
-        await sql`
-            ALTER TABLE job_postings 
-            ADD COLUMN IF NOT EXISTS current_stage text DEFAULT 'PREPARATORIA' NOT NULL;
-        `;
-        console.log("Schema alter successful!");
-    } catch (error) {
-        console.error("Migration failed", error);
+        await sql`ALTER TABLE job_postings ADD COLUMN department text;`;
+        console.log('Column "department" added successfully.');
+    } catch (e) {
+        if (e.code === '42701') {
+            console.log('Column already exists, proceeding.');
+        } else {
+            console.error(e);
+        }
     } finally {
-        await sql.end();
-        console.log("Connection closed.");
+        sql.end();
     }
 }
-
 run();

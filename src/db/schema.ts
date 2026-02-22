@@ -16,6 +16,7 @@ export const jobPostings = pgTable('job_postings', {
     code: text('code').notNull(),
     regime: text('regime').notNull(),
     vacancies: text('vacancies').notNull(), // text in case they say "multiple" or "2"
+    department: text('department'), // Area or internal unit 
     description: text('description').notNull(),
     salary: text('salary'), // opcional text based salary structure
     status: text('status').default('DRAFT').notNull(), // DRAFT, PUBLISHED, IN_EVALUATION, CLOSED, CANCELLED

@@ -16,6 +16,7 @@ export default function NuevaConvocatoriaPage() {
         title: '',
         code: '',
         regime: 'CAS',
+        department: '',
         vacancies: '1',
         description: '',
         salary: '',
@@ -113,6 +114,19 @@ export default function NuevaConvocatoriaPage() {
                                     />
                                 </div>
 
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Área / Dpto. Solicitante *</label>
+                                    <input
+                                        type="text"
+                                        name="department"
+                                        value={formData.department}
+                                        onChange={handleChange}
+                                        placeholder="Ej: Departamento de Pediatría"
+                                        required
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hospital-blue focus:border-transparent transition-all outline-none"
+                                    />
+                                </div>
+
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-bold text-gray-700 mb-1">Régimen *</label>
@@ -125,9 +139,8 @@ export default function NuevaConvocatoriaPage() {
                                         >
                                             <option value="CAS">CAS (D.L. 1057)</option>
                                             <option value="276">Nombrados (D.L. 276)</option>
-                                            <option value="728">Privado (D.L. 728)</option>
-                                            <option value="PRACTICAS">Prácticas</option>
-                                            <option value="OTROS">Otros / Locadores</option>
+                                            <option value="TERCEROS">Locador / Terceros</option>
+                                            <option value="INTERNO">Proceso Interno</option>
                                         </select>
                                     </div>
                                     <div>

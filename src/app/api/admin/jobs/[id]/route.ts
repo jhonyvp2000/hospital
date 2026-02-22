@@ -39,10 +39,22 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
         const { id: jobId } = await context.params;
         const body = await request.json();
 
-        // Allow updating the status
-        if (body.status) {
+        // Allow updating metadata and status
+        const updateData: any = { updatedAt: new Date() };
+        if (body.title) updateData.title = body.title;
+        if (body.code) updateData.code = body.code;
+        if (body.regime) updateData.regime = body.regime;
+        if (body.department) updateData.department = body.department;
+        if (body.vacancies) updateData.vacancies = body.vacancies;
+        if (body.description) updateData.description = body.description;
+        if (body.salary) updateData.salary = body.salary;
+        if (body.status) updateData.status = body.status;
+        if (body.currentStage) updateData.currentStage = body.currentStage;
+        if (body.endDate !== undefined) updateData.endDate = body.endDate ? new Date(body.endDate) : null;
+
+        if (Object.keys(updateData).length > 1) { // has more than just updatedAt
             const updatedJob = await db.update(jobPostings)
-                .set({ status: body.status, updatedAt: new Date() })
+                .set(updateData)
                 .where(eq(jobPostings.id, jobId))
                 .returning();
 
