@@ -4,9 +4,8 @@ import { jobDocuments, jobPostings } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../../../auth/[...nextauth]/route";
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
     try {
@@ -35,24 +34,47 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
             return NextResponse.json({ error: 'Missing file, title, or documentType' }, { status: 400 });
         }
 
-        // Validate file type (PDF only for now as requested)
         if (file.type !== 'application/pdf') {
             return NextResponse.json({ error: 'Only PDF files are allowed' }, { status: 400 });
         }
 
-        // Prepare the upload directory
-        const uploadDir = join(process.cwd(), 'public', 'uploads', 'convocatorias', jobId);
-        await mkdir(uploadDir, { recursive: true });
+        // Initialize Supabase Client
+        const supabaseUrl = process.env.SUPABASE_URL!;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-        // Generate a unique filename while preserving extension
-        const uniqueFilename = `${uuidv4()}.pdf`;
-        const filePath = join(uploadDir, uniqueFilename);
-        const publicUrl = `/uploads/convocatorias/${jobId}/${uniqueFilename}`; // URL accessible from browser
+        if (!supabaseUrl || !supabaseKey) {
+            console.error("Missing SUPABASE credentials in environment");
+            return NextResponse.json({ error: 'Server misconfiguration: Storage not available' }, { status: 500 });
+        }
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Write the file to disk
+        const uniqueFilename = `${jobId}/${uuidv4()}.pdf`;
+
+        // Read file to buffer/arraybuffer for Supabase
         const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        await writeFile(filePath, buffer);
+        const fileBuffer = Buffer.from(bytes);
+
+        // Upload to Supabase 'convocatorias' bucket
+        const { data: uploadData, error: uploadError } = await supabase
+            .storage
+            .from('convocatorias')
+            .upload(uniqueFilename, fileBuffer, {
+                contentType: 'application/pdf',
+                upsert: false // Don't overwrite existing
+            });
+
+        if (uploadError) {
+            console.error("Supabase Upload Error:", uploadError);
+            return NextResponse.json({ error: 'Failed to upload to cloud storage' }, { status: 500 });
+        }
+
+        // Get the permanent Public URL for the database
+        const { data: publicUrlData } = supabase
+            .storage
+            .from('convocatorias')
+            .getPublicUrl(uniqueFilename);
+
+        const publicUrl = publicUrlData.publicUrl;
 
         // Save reference in the database
         const newRecord = await db.insert(jobDocuments).values({
@@ -93,14 +115,25 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
             return NextResponse.json({ error: 'Document not found' }, { status: 404 });
         }
 
-        // Try to delete the physical file
-        try {
-            const { unlink } = await import('fs/promises');
-            const filePath = join(process.cwd(), 'public', doc.documentUrl);
-            await unlink(filePath);
-        } catch (fsError) {
-            console.warn('Physical file could not be deleted or was already missing:', fsError);
-            // We continue to delete the DB record even if physical file is missing
+        // Initialize Supabase Client for Deletion
+        const supabaseUrl = process.env.SUPABASE_URL!;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+        if (supabaseUrl && supabaseKey) {
+            const supabase = createClient(supabaseUrl, supabaseKey);
+            try {
+                // Extract filename from the URL (Assuming structure: /storage/v1/object/public/convocatorias/[jobId]/[filename.pdf])
+                // A simpler way: The unique ID we made was jobId/uuid.pdf. We can extract from URL or assume the end path
+                const urlParts = doc.documentUrl.split('/');
+                const fileName = urlParts.pop(); // uuid.pdf
+                const jobIdStr = urlParts.pop(); // jobId
+
+                if (fileName && jobIdStr) {
+                    const pathToRemove = `${jobIdStr}/${fileName}`;
+                    await supabase.storage.from('convocatorias').remove([pathToRemove]);
+                }
+            } catch (cloudError) {
+                console.warn('Could not delete from Supabase storage:', cloudError);
+            }
         }
 
         // Delete from database
