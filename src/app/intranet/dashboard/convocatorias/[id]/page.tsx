@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     ArrowLeft, UploadCloud, FileText, FileCheck, FileX,
-    CheckCircle, AlertCircle, Clock, Trash2, Download, Eye, EyeOff
+    CheckCircle, AlertCircle, Clock, Trash2, Download, Eye, EyeOff, ExternalLink
 } from 'lucide-react';
 
 export default function DetalleConvocatoria({ params }: { params: Promise<{ id: string }> }) {
@@ -340,8 +340,18 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                                                             href={doc.documentUrl}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
+                                                            className="p-1.5 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                                            title="Ver Documento"
+                                                        >
+                                                            <ExternalLink className="w-4 h-4" />
+                                                        </a>
+                                                        <a
+                                                            href={doc.documentUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
                                                             className="p-1.5 text-gray-400 hover:text-hospital-blue hover:bg-blue-50 rounded-lg transition-colors"
                                                             title="Descargar"
+                                                            download
                                                         >
                                                             <Download className="w-4 h-4" />
                                                         </a>
