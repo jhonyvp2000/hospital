@@ -189,6 +189,33 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
         }
     };
 
+    const handleDeleteJob = async () => {
+        const confirm1 = confirm("⚠️ ADVERTENCIA CRÍTICA ⚠️\n\nEstás a punto de ELIMINAR COMPLETAMENTE esta convocatoria. Esto borrará el expediente, el historial de fases y todos los PDFs adjuntos de la nube.\n\n¿Estás absolutamente seguro de continuar?");
+        if (!confirm1) return;
+
+        const confirm2 = prompt(`Para confirmar la eliminación definitiva, escribe el código de la convocatoria: ${job.code}`);
+        if (confirm2 !== job.code) {
+            alert("El código ingresado no coincide. Eliminación cancelada.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`/api/admin/jobs/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (res.ok) {
+                alert("Convocatoria eliminada exitosamente.");
+                router.push('/intranet/dashboard/convocatorias');
+            } else {
+                alert("Error al intentar eliminar la convocatoria.");
+            }
+        } catch (error) {
+            console.error("Error deleting job:", error);
+            alert("Error de conexión al eliminar la convocatoria.");
+        }
+    };
+
     if (loading) return <div className="p-12 text-center text-gray-500">Cargando expediente...</div>;
     if (!job) return null;
 
@@ -277,21 +304,33 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                             />
                         </div>
 
-                        <div className="md:col-span-2 flex justify-end gap-3 mt-4 pt-4 border-t border-gray-100">
-                            <button
-                                type="button"
-                                onClick={() => setIsEditing(false)}
-                                className="px-6 py-2 rounded-lg font-bold text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                type="submit"
-                                disabled={savingEdit}
-                                className="px-6 py-2 rounded-lg font-bold text-sm bg-hospital-blue text-white hover:bg-blue-800 transition-colors flex items-center gap-2 disabled:opacity-50"
-                            >
-                                {savingEdit ? 'Guardando...' : <><Save className="w-4 h-4" /> Guardar Cambios</>}
-                            </button>
+                        <div className="md:col-span-2 flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                            <div>
+                                <button
+                                    type="button"
+                                    onClick={handleDeleteJob}
+                                    className="px-4 py-2 rounded-lg font-bold text-sm text-red-600 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors flex items-center gap-2"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                    Eliminar Expediente...
+                                </button>
+                            </div>
+                            <div className="flex gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsEditing(false)}
+                                    className="px-6 py-2 rounded-lg font-bold text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={savingEdit}
+                                    className="px-6 py-2 rounded-lg font-bold text-sm bg-hospital-blue text-white hover:bg-blue-800 transition-colors flex items-center gap-2 disabled:opacity-50"
+                                >
+                                    {savingEdit ? 'Guardando...' : <><Save className="w-4 h-4" /> Guardar Cambios</>}
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
