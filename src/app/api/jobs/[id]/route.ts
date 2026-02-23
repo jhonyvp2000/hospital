@@ -22,9 +22,14 @@ export async function GET(request: Request, context: { params: Promise<{ id: str
             return NextResponse.json({ error: 'Job not found or not visible' }, { status: 404 });
         }
 
-        // Fetch attached documents
+        // Fetch attached documents (Only public ones)
         const documents = await db.select().from(jobDocuments)
-            .where(eq(jobDocuments.jobPostingId, jobId))
+            .where(
+                and(
+                    eq(jobDocuments.jobPostingId, jobId),
+                    eq(jobDocuments.isPublic, true)
+                )
+            )
             .orderBy(desc(jobDocuments.uploadedAt));
 
         return NextResponse.json({ ...job, documents });

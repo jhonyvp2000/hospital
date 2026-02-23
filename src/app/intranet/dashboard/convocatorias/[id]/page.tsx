@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     ArrowLeft, UploadCloud, FileText, FileCheck, FileX,
-    CheckCircle, AlertCircle, Clock, Trash2, Download
+    CheckCircle, AlertCircle, Clock, Trash2, Download, Eye, EyeOff
 } from 'lucide-react';
 
 export default function DetalleConvocatoria({ params }: { params: Promise<{ id: string }> }) {
@@ -123,7 +123,6 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
             });
 
             if (res.ok) {
-                // Refresh the job details to show the updated documents list
                 await fetchJobDetails();
             } else {
                 alert("Error al eliminar el documento");
@@ -131,6 +130,24 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
         } catch (err) {
             console.error("Error deleting document:", err);
             alert("Error de conexión al eliminar");
+        }
+    };
+
+    const handleToggleVisibility = async (docId: string, currentVisibility: boolean) => {
+        try {
+            const res = await fetch(`/api/admin/jobs/${id}/documents`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ docId, isPublic: !currentVisibility })
+            });
+
+            if (res.ok) {
+                await fetchJobDetails();
+            } else {
+                alert("Error al cambiar la visibilidad del documento.");
+            }
+        } catch (error) {
+            console.error("Error toggling document visibility:", error);
         }
     };
 
@@ -293,13 +310,18 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                                         <h4 className="font-bold text-gray-800 text-sm mb-4 border-b pb-2">{group}</h4>
                                         <div className="space-y-3">
                                             {groupDocs.map((doc: any) => (
-                                                <div key={doc.id} className="flex items-center justify-between group">
+                                                <div key={doc.id} className={`flex items-center justify-between group p-2 rounded-lg transition-colors ${!doc.isPublic ? 'bg-gray-50 border border-gray-200/60' : 'hover:bg-gray-50'}`}>
                                                     <div className="flex items-center gap-3">
-                                                        <FileText className="w-5 h-5 text-red-500 shrink-0" />
+                                                        <FileText className={`w-5 h-5 shrink-0 ${!doc.isPublic ? 'text-gray-400' : 'text-red-500'}`} />
                                                         <div>
-                                                            <h5 className="font-medium text-gray-800 text-sm group-hover:text-hospital-blue transition-colors">
-                                                                {doc.title}
-                                                            </h5>
+                                                            <div className="flex items-center gap-2">
+                                                                <h5 className={`font-medium text-sm transition-colors ${!doc.isPublic ? 'text-gray-500 line-through decoration-gray-300' : 'text-gray-800 group-hover:text-hospital-blue'}`}>
+                                                                    {doc.title}
+                                                                </h5>
+                                                                {!doc.isPublic && (
+                                                                    <span className="text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full font-bold">OCULTO</span>
+                                                                )}
+                                                            </div>
                                                             <div className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
                                                                 <Clock className="w-3 h-3" />
                                                                 {new Date(doc.uploadedAt).toLocaleString('es-PE')}
@@ -307,6 +329,13 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center gap-1">
+                                                        <button
+                                                            onClick={() => handleToggleVisibility(doc.id, doc.isPublic)}
+                                                            className={`p-1.5 rounded-lg transition-colors ${doc.isPublic ? 'text-blue-500 hover:bg-blue-100 bg-blue-50' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200'}`}
+                                                            title={doc.isPublic ? "Ocultar documento" : "Mostrar documento"}
+                                                        >
+                                                            {doc.isPublic ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                                                        </button>
                                                         <a
                                                             href={doc.documentUrl}
                                                             target="_blank"

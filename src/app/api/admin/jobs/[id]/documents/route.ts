@@ -146,3 +146,29 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+
+export async function PATCH(request: Request, context: { params: Promise<{ id: string }> }) {
+    try {
+        const session = await getServerSession(authOptions);
+        if (!session) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const body = await request.json();
+        const { docId, isPublic } = body;
+
+        if (!docId || isPublic === undefined) {
+            return NextResponse.json({ error: 'Missing docId or isPublic boolean' }, { status: 400 });
+        }
+
+        const updated = await db.update(jobDocuments)
+            .set({ isPublic })
+            .where(eq(jobDocuments.id, docId))
+            .returning();
+
+        return NextResponse.json({ message: 'Visibility updated', document: updated[0] }, { status: 200 });
+    } catch (error: any) {
+        console.error('Error updating document visibility:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
+}

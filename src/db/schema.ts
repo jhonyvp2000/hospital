@@ -34,5 +34,6 @@ export const jobDocuments = pgTable('job_documents', {
     title: text('title').notNull(),
     documentUrl: text('document_url').notNull(),
     documentType: text('document_type').notNull(), // BASES, RESULTS_PRE, COMMUNIQUE, RESULTS_FINAL, OTHER
+    isPublic: boolean('is_public').default(true).notNull(), // Visibility toggle for public frontend
     uploadedAt: timestamp('uploaded_at').defaultNow().notNull(),
 });
