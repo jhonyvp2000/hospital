@@ -208,11 +208,8 @@ export default function ConvocatoriasPage() {
                                     </div>
 
                                     <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-3">
-                                        <Link href={`/convocatorias/${item.id}`} className="flex-1 sm:flex-none bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-700 text-gray-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                                            <FileText size={18} /> Bases
-                                        </Link>
-                                        <Link href={`/convocatorias/${item.id}`} className="flex-1 sm:flex-none bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                                            Postular <ChevronRight size={18} />
+                                        <Link href={`/convocatorias/${item.id}`} className="flex-1 sm:flex-none bg-blue-600 text-white hover:bg-blue-700 px-8 py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                                            Ver Detalles y Postular <ChevronRight size={18} />
                                         </Link>
                                     </div>
                                 </div>
