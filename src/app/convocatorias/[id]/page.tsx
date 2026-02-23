@@ -219,7 +219,7 @@ export default function ConvocatoriaDetallePage({ params }: { params: Promise<{ 
                                     )}
 
                                     {/* Evaluation */}
-                                    {evaluationDocs.length > 0 && currentStageIndex >= 2 && (
+                                    {evaluationDocs.length > 0 && (
                                         <div>
                                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Formatos y Evaluaciones Preliminares</h3>
                                             <div className="grid gap-3">
@@ -240,7 +240,7 @@ export default function ConvocatoriaDetallePage({ params }: { params: Promise<{ 
                                     )}
 
                                     {/* Final Results */}
-                                    {finalDocs.length > 0 && currentStageIndex >= 4 && (
+                                    {finalDocs.length > 0 && (
                                         <div>
                                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Resultados Finales</h3>
                                             <div className="grid gap-3">
