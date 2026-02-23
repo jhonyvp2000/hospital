@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     ArrowLeft, UploadCloud, FileText, FileCheck, FileX,
-    CheckCircle, AlertCircle, Clock, Trash2, Download, Eye, EyeOff, ExternalLink
+    CheckCircle, AlertCircle, Clock, Trash2, Download, Eye, EyeOff, Edit2, X, Save
 } from 'lucide-react';
 
 export default function DetalleConvocatoria({ params }: { params: Promise<{ id: string }> }) {
@@ -14,6 +14,11 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
     const [job, setJob] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
+
+    // Edit state
+    const [isEditing, setIsEditing] = useState(false);
+    const [editForm, setEditForm] = useState<any>({});
+    const [savingEdit, setSavingEdit] = useState(false);
 
     // File upload state
     const [file, setFile] = useState<File | null>(null);
@@ -32,6 +37,16 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
             if (res.ok) {
                 const data = await res.json();
                 setJob(data);
+                // Initialize edit form 
+                setEditForm({
+                    title: data.title,
+                    code: data.code,
+                    regime: data.regime,
+                    department: data.department || '',
+                    vacancies: data.vacancies,
+                    description: data.description,
+                    salary: data.salary || ''
+                });
             } else {
                 console.error("Job details response not OK: ", res.status);
                 // router.push('/intranet/dashboard/convocatorias');
@@ -40,6 +55,29 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
             console.error(error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSaveEdit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setSavingEdit(true);
+        try {
+            const res = await fetch(`/api/admin/jobs/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(editForm)
+            });
+            if (res.ok) {
+                setIsEditing(false);
+                await fetchJobDetails();
+            } else {
+                alert("Error al guardar los cambios.");
+            }
+        } catch (error) {
+            console.error("Error saving edits:", error);
+            alert("Error de conexión al guardar.");
+        } finally {
+            setSavingEdit(false);
         }
     };
 
@@ -154,6 +192,113 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
     if (loading) return <div className="p-12 text-center text-gray-500">Cargando expediente...</div>;
     if (!job) return null;
 
+    if (isEditing) {
+        return (
+            <main className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 w-full max-w-3xl">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b">
+                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <Edit2 className="w-5 h-5 text-hospital-blue" />
+                            Editar Detalles de la Convocatoria
+                        </h2>
+                        <button onClick={() => setIsEditing(false)} className="text-gray-400 hover:text-red-500 transition-colors">
+                            <X className="w-6 h-6" />
+                        </button>
+                    </div>
+
+                    <form onSubmit={handleSaveEdit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="md:col-span-2">
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Título del Puesto *</label>
+                            <input
+                                required
+                                type="text"
+                                value={editForm.title}
+                                onChange={e => setEditForm({ ...editForm, title: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Código del Proceso *</label>
+                            <input
+                                required
+                                type="text"
+                                value={editForm.code}
+                                onChange={e => setEditForm({ ...editForm, code: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Área / Dpto. Solicitante</label>
+                            <input
+                                type="text"
+                                value={editForm.department}
+                                onChange={e => setEditForm({ ...editForm, department: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Régimen</label>
+                            <select
+                                value={editForm.regime}
+                                onChange={e => setEditForm({ ...editForm, regime: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none bg-white"
+                            >
+                                <option value="CAS (D.L. 1057)">CAS (D.L. 1057)</option>
+                                <option value="Nombrado (D.L. 276)">Nombrado (D.L. 276)</option>
+                                <option value="Múltiple">Múltiple</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">N° de Vacantes</label>
+                            <input
+                                type="text"
+                                value={editForm.vacancies}
+                                onChange={e => setEditForm({ ...editForm, vacancies: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Remuneración (Opcional)</label>
+                            <input
+                                type="text"
+                                value={editForm.salary}
+                                onChange={e => setEditForm({ ...editForm, salary: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none"
+                            />
+                        </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Descripción / Perfil *</label>
+                            <textarea
+                                required
+                                rows={4}
+                                value={editForm.description}
+                                onChange={e => setEditForm({ ...editForm, description: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-hospital-blue outline-none resize-y"
+                            />
+                        </div>
+
+                        <div className="md:col-span-2 flex justify-end gap-3 mt-4 pt-4 border-t border-gray-100">
+                            <button
+                                type="button"
+                                onClick={() => setIsEditing(false)}
+                                className="px-6 py-2 rounded-lg font-bold text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="submit"
+                                disabled={savingEdit}
+                                className="px-6 py-2 rounded-lg font-bold text-sm bg-hospital-blue text-white hover:bg-blue-800 transition-colors flex items-center gap-2 disabled:opacity-50"
+                            >
+                                {savingEdit ? 'Guardando...' : <><Save className="w-4 h-4" /> Guardar Cambios</>}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <main className="min-h-screen bg-gray-50 flex flex-col">
             {/* Header */}
@@ -174,6 +319,13 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                         <p className="text-gray-600 text-sm mt-1">{job.title}</p>
                     </div>
                     <div className="flex gap-3">
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="p-2 mr-2 rounded-lg text-gray-400 hover:text-hospital-blue hover:bg-blue-50 transition-colors border border-transparent"
+                            title="Editar Datos de Convocatoria"
+                        >
+                            <Edit2 className="w-5 h-5" />
+                        </button>
                         <button
                             onClick={handlePublish}
                             className={`px-6 py-2 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-colors border ${job.status === 'PUBLISHED'
