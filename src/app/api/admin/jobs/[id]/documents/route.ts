@@ -69,3 +69,47 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+
+export async function DELETE(request: Request, context: { params: Promise<{ id: string }> }) {
+    try {
+        const session = await getServerSession(authOptions);
+        if (!session) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { searchParams } = new URL(request.url);
+        const docId = searchParams.get('docId');
+
+        if (!docId) {
+            return NextResponse.json({ error: 'Missing document ID' }, { status: 400 });
+        }
+
+        // Get document to find its URL
+        const doc = await db.query.jobDocuments.findFirst({
+            where: eq(jobDocuments.id, docId)
+        });
+
+        if (!doc) {
+            return NextResponse.json({ error: 'Document not found' }, { status: 404 });
+        }
+
+        // Try to delete the physical file
+        try {
+            const { unlink } = await import('fs/promises');
+            const filePath = join(process.cwd(), 'public', doc.documentUrl);
+            await unlink(filePath);
+        } catch (fsError) {
+            console.warn('Physical file could not be deleted or was already missing:', fsError);
+            // We continue to delete the DB record even if physical file is missing
+        }
+
+        // Delete from database
+        await db.delete(jobDocuments).where(eq(jobDocuments.id, docId));
+
+        return NextResponse.json({ message: 'Document deleted successfully' }, { status: 200 });
+
+    } catch (error: any) {
+        console.error('Error deleting document:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
+}

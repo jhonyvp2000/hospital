@@ -114,6 +114,26 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
         }
     };
 
+    const handleDeleteDocument = async (docId: string) => {
+        if (!confirm('¿Estás seguro de que deseas eliminar este documento? Esta acción no se puede deshacer.')) return;
+
+        try {
+            const res = await fetch(`/api/admin/jobs/${id}/documents?docId=${docId}`, {
+                method: 'DELETE',
+            });
+
+            if (res.ok) {
+                // Refresh the job details to show the updated documents list
+                await fetchJobDetails();
+            } else {
+                alert("Error al eliminar el documento");
+            }
+        } catch (err) {
+            console.error("Error deleting document:", err);
+            alert("Error de conexión al eliminar");
+        }
+    };
+
     if (loading) return <div className="p-12 text-center text-gray-500">Cargando expediente...</div>;
     if (!job) return null;
 
@@ -296,7 +316,11 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                                                         >
                                                             <Download className="w-4 h-4" />
                                                         </a>
-                                                        <button className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Eliminar (No implementado en MVP)">
+                                                        <button
+                                                            onClick={() => handleDeleteDocument(doc.id)}
+                                                            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                            title="Eliminar"
+                                                        >
                                                             <Trash2 className="w-4 h-4" />
                                                         </button>
                                                     </div>
