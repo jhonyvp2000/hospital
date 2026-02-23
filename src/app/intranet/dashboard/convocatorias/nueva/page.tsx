@@ -137,10 +137,11 @@ export default function NuevaConvocatoriaPage() {
                                             required
                                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hospital-blue focus:border-transparent transition-all outline-none bg-white"
                                         >
-                                            <option value="CAS">CAS (D.L. 1057)</option>
-                                            <option value="276">Nombrados (D.L. 276)</option>
-                                            <option value="TERCEROS">Locador / Terceros</option>
-                                            <option value="INTERNO">Proceso Interno</option>
+                                            <option value="">Seleccione el régimen...</option>
+                                            <option value="CAS (D.L. 1057)">CAS (D.L. 1057)</option>
+                                            <option value="Nombrados (D.L. 276)">Nombrados (D.L. 276)</option>
+                                            <option value="Múltiple">Múltiple</option>
+                                            <option value="Proceso Interno">Proceso Interno</option>
                                         </select>
                                     </div>
                                     <div>
