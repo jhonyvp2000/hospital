@@ -93,7 +93,7 @@ export default function IntranetDashboardPage() {
                     {/* Module: Recursos Humanos */}
                     <DashboardCard title="Gestión de RR.HH.">
                         <Link href="/intranet/dashboard/convocatorias">
-                            <MenuItem icon={FileText} text="Convocatorias CAS" subtext="Registra procesos de selección" active />
+                            <MenuItem icon={FileText} text="Convocatorias de Personal" subtext="Registra procesos de selección" active />
                         </Link>
                         <MenuItem icon={User} text="Mi Legajo Digital" subtext="Resoluciones y contratos" />
                         <MenuItem icon={Clock} text="Marcaciones" subtext="Historial de asistencia" />
