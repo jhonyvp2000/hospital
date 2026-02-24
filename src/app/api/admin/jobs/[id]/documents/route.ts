@@ -155,20 +155,29 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
         }
 
         const body = await request.json();
-        const { docId, isPublic } = body;
+        const { docId, isPublic, title, documentType } = body;
 
-        if (!docId || isPublic === undefined) {
-            return NextResponse.json({ error: 'Missing docId or isPublic boolean' }, { status: 400 });
+        if (!docId) {
+            return NextResponse.json({ error: 'Missing docId' }, { status: 400 });
+        }
+
+        const updateData: any = {};
+        if (isPublic !== undefined) updateData.isPublic = isPublic;
+        if (title !== undefined) updateData.title = title;
+        if (documentType !== undefined) updateData.documentType = documentType;
+
+        if (Object.keys(updateData).length === 0) {
+            return NextResponse.json({ error: 'No update fields provided' }, { status: 400 });
         }
 
         const updated = await db.update(jobDocuments)
-            .set({ isPublic })
+            .set(updateData)
             .where(eq(jobDocuments.id, docId))
             .returning();
 
-        return NextResponse.json({ message: 'Visibility updated', document: updated[0] }, { status: 200 });
+        return NextResponse.json({ message: 'Document updated', document: updated[0] }, { status: 200 });
     } catch (error: any) {
-        console.error('Error updating document visibility:', error);
+        console.error('Error updating document metadata:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

@@ -171,6 +171,10 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
         }
     };
 
+    const [editingDocId, setEditingDocId] = useState<string | null>(null);
+    const [editDocForm, setEditDocForm] = useState<{ title: string, documentType: string }>({ title: '', documentType: '' });
+    const [savingDoc, setSavingDoc] = useState(false);
+
     const handleToggleVisibility = async (docId: string, currentVisibility: boolean) => {
         try {
             const res = await fetch(`/api/admin/jobs/${id}/documents`, {
@@ -186,6 +190,50 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
             }
         } catch (error) {
             console.error("Error toggling document visibility:", error);
+        }
+    };
+
+    const handleStartDocEdit = (doc: any) => {
+        setEditingDocId(doc.id);
+        setEditDocForm({
+            title: doc.title,
+            documentType: doc.documentType
+        });
+    };
+
+    const handleCancelDocEdit = () => {
+        setEditingDocId(null);
+    };
+
+    const handleSaveDocEdit = async (docId: string) => {
+        if (!editDocForm.title.trim()) {
+            alert("El título no puede estar vacío.");
+            return;
+        }
+
+        setSavingDoc(true);
+        try {
+            const res = await fetch(`/api/admin/jobs/${id}/documents`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    docId,
+                    title: editDocForm.title,
+                    documentType: editDocForm.documentType
+                })
+            });
+
+            if (res.ok) {
+                setEditingDocId(null);
+                await fetchJobDetails();
+            } else {
+                alert("Error al guardar los cambios del documento.");
+            }
+        } catch (error) {
+            console.error("Error saving document edit:", error);
+            alert("Error de conexión.");
+        } finally {
+            setSavingDoc(false);
         }
     };
 
@@ -502,48 +550,100 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                                         <div className="space-y-3">
                                             {groupDocs.map((doc: any) => (
                                                 <div key={doc.id} className={`flex items-center justify-between group p-2 rounded-lg transition-colors ${!doc.isPublic ? 'bg-gray-50 border border-gray-200/60' : 'hover:bg-gray-50'}`}>
-                                                    <div className="flex items-center gap-3">
+                                                    <div className="flex items-center gap-3 flex-1">
                                                         <FileText className={`w-5 h-5 shrink-0 ${!doc.isPublic ? 'text-gray-400' : 'text-red-500'}`} />
-                                                        <div>
-                                                            <div className="flex items-center gap-2">
-                                                                <h5 className={`font-medium text-sm transition-colors ${!doc.isPublic ? 'text-gray-500 line-through decoration-gray-300' : 'text-gray-800 group-hover:text-hospital-blue'}`}>
-                                                                    {doc.title}
-                                                                </h5>
-                                                                {!doc.isPublic && (
-                                                                    <span className="text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full font-bold">OCULTO</span>
-                                                                )}
+
+                                                        {editingDocId === doc.id ? (
+                                                            <div className="flex-1 flex flex-col md:flex-row gap-2 items-start md:items-center py-1">
+                                                                <input
+                                                                    type="text"
+                                                                    value={editDocForm.title}
+                                                                    onChange={(e) => setEditDocForm({ ...editDocForm, title: e.target.value })}
+                                                                    className="px-2 py-1 text-sm border border-hospital-blue rounded outline-none w-full max-w-xs focus:ring-1 focus:ring-hospital-blue"
+                                                                    autoFocus
+                                                                />
+                                                                <select
+                                                                    value={editDocForm.documentType}
+                                                                    onChange={(e) => setEditDocForm({ ...editDocForm, documentType: e.target.value })}
+                                                                    className="px-2 py-1 text-sm border border-gray-300 rounded outline-none"
+                                                                >
+                                                                    <option value="BASES">Bases y Anexos</option>
+                                                                    <option value="RESULTS_PRE">Resultados Curriculares</option>
+                                                                    <option value="COMMUNIQUE">Comunicado / Fe de erratas</option>
+                                                                    <option value="RESULTS_FINAL">Resultados Finales</option>
+                                                                    <option value="OTHER">Otros</option>
+                                                                </select>
+
+                                                                <div className="flex items-center gap-1 ml-auto">
+                                                                    <button
+                                                                        onClick={() => handleSaveDocEdit(doc.id)}
+                                                                        disabled={savingDoc}
+                                                                        className="p-1.5 text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+                                                                        title="Guardar Cambios"
+                                                                    >
+                                                                        <CheckCircle className="w-4 h-4" />
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={handleCancelDocEdit}
+                                                                        className="p-1.5 text-gray-500 hover:bg-gray-200 rounded-lg transition-colors"
+                                                                        title="Cancelar"
+                                                                    >
+                                                                        <X className="w-4 h-4" />
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                            <div className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
-                                                                <Clock className="w-3 h-3" />
-                                                                {new Date(doc.uploadedAt).toLocaleString('es-PE')}
+                                                        ) : (
+                                                            <div>
+                                                                <div className="flex items-center gap-2">
+                                                                    <h5 className={`font-medium text-sm transition-colors ${!doc.isPublic ? 'text-gray-500 line-through decoration-gray-300' : 'text-gray-800 group-hover:text-hospital-blue'}`}>
+                                                                        {doc.title}
+                                                                    </h5>
+                                                                    {!doc.isPublic && (
+                                                                        <span className="text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full font-bold">OCULTO</span>
+                                                                    )}
+                                                                </div>
+                                                                <div className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
+                                                                    <Clock className="w-3 h-3" />
+                                                                    {new Date(doc.uploadedAt).toLocaleString('es-PE')}
+                                                                </div>
                                                             </div>
+                                                        )}
+                                                    </div>
+
+                                                    {editingDocId !== doc.id && (
+                                                        <div className="flex items-center gap-1 ml-4">
+                                                            <button
+                                                                onClick={() => handleStartDocEdit(doc)}
+                                                                className="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                                                                title="Editar Nombre o Fase"
+                                                            >
+                                                                <Edit2 className="w-4 h-4" />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleToggleVisibility(doc.id, doc.isPublic)}
+                                                                className={`p-1.5 rounded-lg transition-colors ${doc.isPublic ? 'text-blue-500 hover:bg-blue-100 bg-blue-50' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200'}`}
+                                                                title={doc.isPublic ? "Ocultar documento" : "Mostrar documento"}
+                                                            >
+                                                                {doc.isPublic ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                                                            </button>
+                                                            <a
+                                                                href={doc.documentUrl}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="p-1.5 text-gray-400 hover:text-hospital-blue hover:bg-blue-50 rounded-lg transition-colors"
+                                                                title="Descargar"
+                                                            >
+                                                                <Download className="w-4 h-4" />
+                                                            </a>
+                                                            <button
+                                                                onClick={() => handleDeleteDocument(doc.id)}
+                                                                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                                title="Eliminar"
+                                                            >
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </button>
                                                         </div>
-                                                    </div>
-                                                    <div className="flex items-center gap-1">
-                                                        <button
-                                                            onClick={() => handleToggleVisibility(doc.id, doc.isPublic)}
-                                                            className={`p-1.5 rounded-lg transition-colors ${doc.isPublic ? 'text-blue-500 hover:bg-blue-100 bg-blue-50' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200'}`}
-                                                            title={doc.isPublic ? "Ocultar documento" : "Mostrar documento"}
-                                                        >
-                                                            {doc.isPublic ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                                                        </button>
-                                                        <a
-                                                            href={doc.documentUrl}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="p-1.5 text-gray-400 hover:text-hospital-blue hover:bg-blue-50 rounded-lg transition-colors"
-                                                            title="Descargar"
-                                                        >
-                                                            <Download className="w-4 h-4" />
-                                                        </a>
-                                                        <button
-                                                            onClick={() => handleDeleteDocument(doc.id)}
-                                                            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                                                            title="Eliminar"
-                                                        >
-                                                            <Trash2 className="w-4 h-4" />
-                                                        </button>
-                                                    </div>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
