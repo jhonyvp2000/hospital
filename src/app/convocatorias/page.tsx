@@ -47,6 +47,12 @@ export default function ConvocatoriasPage() {
         ? jobs
         : jobs.filter(j => j.regime.includes(filterRegime));
 
+    const handleCardClick = (e: React.MouseEvent, regimeValue: string) => {
+        e.preventDefault();
+        setFilterRegime(regimeValue);
+        document.getElementById('lista-convocatorias')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
 
@@ -90,7 +96,7 @@ export default function ConvocatoriasPage() {
                 {/* Categories Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     {/* CAS */}
-                    <Link href="#cas" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, '1057')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
                             <FileSignature size={28} />
                         </div>
@@ -102,7 +108,7 @@ export default function ConvocatoriasPage() {
                     </Link>
 
                     {/* 276 */}
-                    <Link href="#276" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, '276')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-300">
                             <Users size={28} />
                         </div>
@@ -114,7 +120,7 @@ export default function ConvocatoriasPage() {
                     </Link>
 
                     {/* 728 */}
-                    <Link href="#728" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, '728')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
                             <Building size={28} />
                         </div>
@@ -126,7 +132,7 @@ export default function ConvocatoriasPage() {
                     </Link>
 
                     {/* Ley 30057 */}
-                    <Link href="#30057" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, '30057')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-violet-600 group-hover:text-white transition-colors duration-300">
                             <Milestone size={28} />
                         </div>
@@ -138,7 +144,7 @@ export default function ConvocatoriasPage() {
                     </Link>
 
                     {/* Terceros */}
-                    <Link href="#terceros" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, 'Múltiple')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
                             <HardHat size={28} />
                         </div>
@@ -150,7 +156,7 @@ export default function ConvocatoriasPage() {
                     </Link>
 
                     {/* Internos */}
-                    <Link href="#internos" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                    <Link href="#lista-convocatorias" onClick={(e) => handleCardClick(e, 'Proceso Interno')} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-slate-50 text-slate-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-600 group-hover:text-white transition-colors duration-300">
                             <FileSpreadsheet size={28} />
                         </div>
