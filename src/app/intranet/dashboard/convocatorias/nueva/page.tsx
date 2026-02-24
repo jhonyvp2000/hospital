@@ -140,6 +140,8 @@ export default function NuevaConvocatoriaPage() {
                                             <option value="">Seleccione el régimen...</option>
                                             <option value="CAS (D.L. 1057)">CAS (D.L. 1057)</option>
                                             <option value="Nombrados (D.L. 276)">Nombrados (D.L. 276)</option>
+                                            <option value="Privado (D.L. 728)">Régimen Privado (D.L. 728)</option>
+                                            <option value="Servicio Civil (Ley 30057)">Servicio Civil (Ley 30057)</option>
                                             <option value="Múltiple">Múltiple</option>
                                             <option value="Proceso Interno">Proceso Interno</option>
                                         </select>

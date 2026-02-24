@@ -320,7 +320,10 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                             >
                                 <option value="CAS (D.L. 1057)">CAS (D.L. 1057)</option>
                                 <option value="Nombrado (D.L. 276)">Nombrado (D.L. 276)</option>
+                                <option value="Privado (D.L. 728)">Régimen Privado (D.L. 728)</option>
+                                <option value="Servicio Civil (Ley 30057)">Servicio Civil (Ley 30057)</option>
                                 <option value="Múltiple">Múltiple</option>
+                                <option value="Proceso Interno">Proceso Interno</option>
                             </select>
                         </div>
                         <div>
