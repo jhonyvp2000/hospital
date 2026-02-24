@@ -6,7 +6,7 @@ import {
     Briefcase, Search, FileSignature,
     Users, HardHat, FileSpreadsheet,
     ChevronRight, Calendar, MapPin, CheckCircle,
-    Clock, ArrowRight, Bell, FileText
+    Clock, ArrowRight, Bell, FileText, Building, Milestone
 } from 'lucide-react';
 
 interface PublicJob {
@@ -23,6 +23,7 @@ interface PublicJob {
 export default function ConvocatoriasPage() {
     const [jobs, setJobs] = useState<PublicJob[]>([]);
     const [loading, setLoading] = useState(true);
+    const [filterRegime, setFilterRegime] = useState('Todos los regímenes');
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -41,6 +42,10 @@ export default function ConvocatoriasPage() {
         };
         fetchJobs();
     }, []);
+
+    const filteredJobs = filterRegime === 'Todos los regímenes'
+        ? jobs
+        : jobs.filter(j => j.regime.includes(filterRegime));
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
@@ -83,7 +88,7 @@ export default function ConvocatoriasPage() {
             <main className="container mx-auto max-w-6xl px-4 -mt-10 relative z-30">
 
                 {/* Categories Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     {/* CAS */}
                     <Link href="#cas" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
                         <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
@@ -104,6 +109,30 @@ export default function ConvocatoriasPage() {
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Régimen 276</h3>
                         <p className="text-gray-500 text-sm flex-1">Concursos públicos para nombramiento e ingreso a la carrera administrativa estatal.</p>
                         <div className="mt-4 flex items-center text-cyan-600 font-medium group-hover:gap-2 transition-all text-sm">
+                            Ver convocatorias <ArrowRight size={16} className="ml-1" />
+                        </div>
+                    </Link>
+
+                    {/* 728 */}
+                    <Link href="#728" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                        <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                            <Building size={28} />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Régimen 728</h3>
+                        <p className="text-gray-500 text-sm flex-1">Concursos para ingreso bajo el régimen laboral de la actividad privada (D.L. 728).</p>
+                        <div className="mt-4 flex items-center text-emerald-600 font-medium group-hover:gap-2 transition-all text-sm">
+                            Ver convocatorias <ArrowRight size={16} className="ml-1" />
+                        </div>
+                    </Link>
+
+                    {/* Ley 30057 */}
+                    <Link href="#30057" className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all group flex flex-col h-full">
+                        <div className="w-14 h-14 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-violet-600 group-hover:text-white transition-colors duration-300">
+                            <Milestone size={28} />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Servicio Civil</h3>
+                        <p className="text-gray-500 text-sm flex-1">Concursos públicos de méritos bajo el régimen del Servicio Civil (Ley 30057).</p>
+                        <div className="mt-4 flex items-center text-violet-600 font-medium group-hover:gap-2 transition-all text-sm">
                             Ver convocatorias <ArrowRight size={16} className="ml-1" />
                         </div>
                     </Link>
@@ -153,18 +182,25 @@ export default function ConvocatoriasPage() {
                 </div>
 
                 {/* Convocatorias Vigentes */}
-                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                <div id="lista-convocatorias" className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden scroll-mt-24">
                     <div className="p-8 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gray-50/50">
                         <div>
                             <h2 className="text-2xl font-bold text-gray-800">Convocatorias Vigentes</h2>
                             <p className="text-gray-500">Procesos de selección actualmente en fase de inscripción o postulación.</p>
                         </div>
                         <div className="flex gap-2">
-                            <select className="bg-white border border-gray-200 text-gray-700 py-2 px-4 rounded-lg outline-none text-sm font-medium">
-                                <option>Todos los regímenes</option>
-                                <option>CAS</option>
-                                <option>DL 276</option>
-                                <option>Terceros</option>
+                            <select
+                                value={filterRegime}
+                                onChange={(e) => setFilterRegime(e.target.value)}
+                                className="bg-white border border-gray-200 text-gray-700 py-2 px-4 rounded-lg outline-none text-sm font-medium"
+                            >
+                                <option value="Todos los regímenes">Todos los regímenes</option>
+                                <option value="1057">CAS (D.L. 1057)</option>
+                                <option value="276">Nombrados (D.L. 276)</option>
+                                <option value="728">Privado (D.L. 728)</option>
+                                <option value="30057">Servicio Civil (Ley 30057)</option>
+                                <option value="Múltiple">Terceros / Múltiple</option>
+                                <option value="Proceso Interno">Procesos Internos</option>
                             </select>
                         </div>
                     </div>
@@ -175,13 +211,13 @@ export default function ConvocatoriasPage() {
                                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-4"></div>
                                 <p>Cargando convocatorias...</p>
                             </div>
-                        ) : jobs.length === 0 ? (
+                        ) : filteredJobs.length === 0 ? (
                             <div className="p-12 text-center text-gray-500">
                                 <Briefcase size={48} className="mx-auto text-gray-300 mb-4" />
-                                <p className="text-lg">No hay convocatorias vigentes en este momento.</p>
+                                <p className="text-lg">No hay convocatorias vigentes para el régimen seleccionado.</p>
                             </div>
                         ) : (
-                            jobs.map((item) => (
+                            filteredJobs.map((item) => (
                                 <div key={item.id} className="p-6 md:p-8 hover:bg-gray-50/50 transition-colors flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center group">
 
                                     <div className="flex-1 w-full">
