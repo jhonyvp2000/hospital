@@ -9,6 +9,7 @@ const sql = postgres(connectionString);
 
 async function run() {
     try {
+        await sql`SET search_path TO public`;
         console.log("Creating job_postings...");
         await sql`
             CREATE TABLE IF NOT EXISTS "job_postings" (
