@@ -264,6 +264,15 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
         }
     };
 
+    const formatCurrency = (value: string | null) => {
+        if (!value) return 'No especificada';
+        const num = Number(value.toString().replace(/,/g, ''));
+        if (!isNaN(num) && value.toString().trim() !== '') {
+            return `S/ ${num.toLocaleString('en-US')}`;
+        }
+        return value;
+    };
+
     if (loading) return <div className="p-12 text-center text-gray-500">Cargando expediente...</div>;
     if (!job) return null;
 
@@ -519,7 +528,7 @@ export default function DetalleConvocatoria({ params }: { params: Promise<{ id: 
                         <ul className="space-y-2 text-sm text-gray-600">
                             <li><strong className="text-gray-800">Régimen:</strong> {job.regime}</li>
                             <li><strong className="text-gray-800">Vacantes:</strong> {job.vacancies}</li>
-                            <li><strong className="text-gray-800">Remuneración:</strong> {job.salary || 'No especificada'}</li>
+                            <li><strong className="text-gray-800">Remuneración:</strong> {formatCurrency(job.salary)}</li>
                             <li><strong className="text-gray-800">Fecha Creado:</strong> {new Date(job.createdAt).toLocaleDateString()}</li>
                         </ul>
                     </div>

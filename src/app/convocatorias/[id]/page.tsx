@@ -68,6 +68,15 @@ export default function ConvocatoriaDetallePage({ params }: { params: Promise<{ 
 
     if (!job) return null;
 
+    const formatCurrency = (value: string | null) => {
+        if (!value) return '';
+        const num = Number(value.toString().replace(/,/g, ''));
+        if (!isNaN(num) && value.toString().trim() !== '') {
+            return `S/ ${num.toLocaleString('en-US')}`;
+        }
+        return value;
+    };
+
     const currentStageIndex = STAGES.findIndex(s => s.id === job.currentStage);
     const isActivelyReceivingApplications = job.currentStage === 'CONVOCATORIA';
 
@@ -178,7 +187,7 @@ export default function ConvocatoriaDetallePage({ params }: { params: Promise<{ 
                                 {job.salary && (
                                     <div className="mt-6 flex items-center gap-3 bg-green-50 border border-green-100 p-4 rounded-xl text-green-800 font-medium">
                                         <Info size={20} className="text-green-600" />
-                                        Remuneración referencial: {job.salary}
+                                        Remuneración referencial: {formatCurrency(job.salary)}
                                     </div>
                                 )}
                             </div>
