@@ -3,6 +3,8 @@ import { db } from '@/db';
 import { jobPostings } from '@/db/schema';
 import { desc, or, eq } from 'drizzle-orm';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
     try {
         // Only fetch jobs that are PUBLISHED or IN_EVALUATION

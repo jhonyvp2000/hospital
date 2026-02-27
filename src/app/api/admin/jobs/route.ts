@@ -4,6 +4,7 @@ import { jobPostings, employees } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../../api/auth/[...nextauth]/route";
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
     try {
