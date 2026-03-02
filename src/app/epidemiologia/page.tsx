@@ -102,7 +102,7 @@ export default function EpidemiologiaPage() {
                 <div className="mb-16">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="text-2xl font-bold text-gray-800">Indicadores Hospitalarios</h2>
-                        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm">Actualizado: Octubre 2024</span>
+                        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm">Actualizado: Marzo 2025</span>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
