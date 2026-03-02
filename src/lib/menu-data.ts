@@ -93,9 +93,8 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Portal de Transparencia", href: "/transparencia", icon: Shield, description: "Acceso a información pública" },
                     { title: "Contrataciones", href: "https://www.transparencia.gob.pe/contrataciones/pte_transparencia_contrataciones.aspx?id_entidad=145&id_tema=34&ver=D", icon: Briefcase, description: "Adquisiciones y compras del Estado" },
                     { title: "Documentos de Gestión", href: "/gestion", icon: FileText, description: "ROF, MOF, Plan Estratégico" },
-                    { title: "Indicadores de Gestión", href: "/gestion/indicadores", icon: Activity, description: "Producción y Calidad" },
+                    { title: "Inteligencia Sanitaria", href: "/epidemiologia", icon: Activity, description: "Indicadores y Epidemiología" },
                     { title: "Normatividad", href: "/normatividad", icon: Scale, description: "Leyes y reglamentos" },
-                    { title: "Sala Situacional", href: "/gestion/sala-situacional", icon: Activity, description: "Vigilancia Epidemiológica" },
                     { title: "Sala de Prensa", href: "/sala-de-prensa", icon: Newspaper, description: "Noticias y comunicados" },
                 ]
             },
@@ -126,8 +125,7 @@ export const MENU_DATA: MenuCategory[] = [
             { title: "Convocatorias Laborales", href: "/convocatorias", icon: Briefcase, description: "CAS y otros regímenes" },
             { title: "Docencia e Investigación", href: "/docencia", icon: GraduationCap, description: "Internado y residentado" },
             { title: "Banco de Sangre", href: "/banco-sangre", icon: Heart, description: "Donación y stock" },
-            { title: "Laboratorio Referencial", href: "/laboratorio", icon: TestTube, description: "Pruebas especializadas" },
-            { title: "Intranet del Personal", href: "/intranet", icon: Users, description: "Acceso exclusivo" },
+            { title: "Laboratorio Referencial", href: "/laboratorio", icon: TestTube, description: "Pruebas especializadas" }
         ]
     }
 ];
