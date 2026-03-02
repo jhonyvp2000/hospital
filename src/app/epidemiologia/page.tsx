@@ -7,7 +7,6 @@ import {
     Download, FileText, FileWarning, HeartPulse,
     Microscope, Stethoscope, Users, Baby
 } from 'lucide-react';
-import Breadcrumbs from '@/components/Breadcrumbs';
 
 // Mock Data for Hospital Indicators
 const indicators = [
@@ -55,9 +54,6 @@ export default function EpidemiologiaPage() {
                 <div className="absolute right-0 top-0 opacity-10 pointer-events-none z-0 transform translate-x-32 -translate-y-16">
                     <BarChart3 size={400} />
                 </div>
-
-                <div className="container mx-auto max-w-6xl relative z-20">
-                    <Breadcrumbs />
 
                     <div className="mt-8">
                         <div className="inline-flex items-center gap-2 bg-blue-500/30 border border-blue-400/30 text-blue-100 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide uppercase mb-6 backdrop-blur-sm">
