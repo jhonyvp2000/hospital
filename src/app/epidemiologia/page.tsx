@@ -55,6 +55,7 @@ export default function EpidemiologiaPage() {
                     <BarChart3 size={400} />
                 </div>
 
+                <div className="container mx-auto max-w-6xl relative z-20">
                     <div className="mt-8">
                         <div className="inline-flex items-center gap-2 bg-blue-500/30 border border-blue-400/30 text-blue-100 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide uppercase mb-6 backdrop-blur-sm">
                             <Activity size={16} /> Oficina de Epidemiología
