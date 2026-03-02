@@ -49,7 +49,7 @@ export default function EpidemiologiaPage() {
             )}
 
             {/* Hero Section */}
-            <section className="bg-blue-900 text-white pt-12 pb-24 px-4 relative overflow-hidden">
+            <section className="bg-blue-900 text-white pt-12 pb-40 lg:pb-24 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 bg-blue-950/50 z-10" />
                 <div className="absolute right-0 top-0 opacity-10 pointer-events-none z-0 transform translate-x-32 -translate-y-16">
                     <BarChart3 size={400} />
@@ -93,13 +93,13 @@ export default function EpidemiologiaPage() {
             </section>
 
             {/* Main Content */}
-            <main className="container mx-auto max-w-6xl px-4 -mt-12 relative z-30">
+            <main className="container mx-auto max-w-6xl px-4 -mt-32 lg:-mt-12 relative z-30">
 
                 {/* 1. Hospital Indicators KPIs */}
                 <div className="mb-16">
-                    <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-2xl font-bold text-gray-800">Indicadores Hospitalarios</h2>
-                        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm">Actualizado: Marzo 2025</span>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
+                        <h2 className="text-2xl font-bold text-white shadow-sm">Indicadores Hospitalarios</h2>
+                        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm self-start sm:self-auto">Actualizado: Marzo 2025</span>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
