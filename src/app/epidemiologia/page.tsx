@@ -24,6 +24,22 @@ const bulletins = [
     { id: 4, title: 'Boletín Epidemiológico Vol. 42', date: 'Julio 2024', size: '1.9 MB', week: 'SE 30' },
 ];
 
+// Mock Data for Boletines IAAS
+const bulletinsIaas = [
+    { id: 1, title: 'Boletín IAAS Vol. 10', date: 'Octubre 2024', size: '1.2 MB', week: 'Mes 10' },
+    { id: 2, title: 'Boletín IAAS Vol. 09', date: 'Septiembre 2024', size: '1.5 MB', week: 'Mes 09' },
+    { id: 3, title: 'Boletín IAAS Vol. 08', date: 'Agosto 2024', size: '1.1 MB', week: 'Mes 08' },
+    { id: 4, title: 'Boletín IAAS Vol. 07', date: 'Julio 2024', size: '1.3 MB', week: 'Mes 07' },
+];
+
+// Mock Data for Boletines Estadísticos
+const bulletinsEst = [
+    { id: 1, title: 'Boletín Estadístico T3', date: 'Octubre 2024', size: '3.4 MB', period: 'Trimestre 3' },
+    { id: 2, title: 'Boletín Estadístico T2', date: 'Julio 2024', size: '3.1 MB', period: 'Trimestre 2' },
+    { id: 3, title: 'Boletín Estadístico T1', date: 'Abril 2024', size: '3.8 MB', period: 'Trimestre 1' },
+    { id: 4, title: 'Boletín Estadístico Anual', date: 'Enero 2024', size: '5.9 MB', period: 'Año 2023' },
+];
+
 export default function EpidemiologiaPage() {
     const [activeTab, setActiveTab] = useState('dengue');
     const [isCrisisActive, setIsCrisisActive] = useState(false); // Toggle to simulate Crisis Room
@@ -120,8 +136,144 @@ export default function EpidemiologiaPage() {
                     </div>
                 </div>
 
-                {/* 2. Situational Rooms (Tabs) */}
-                <div className="mb-16 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                {/* 2. Epidemiological Bulletins Grid */}
+                <div className="mb-16">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800">Boletines Epidemiológicos</h2>
+                            <p className="text-gray-500 mt-1">Reportes oficiales descargables por semana epidemiológica (SE).</p>
+                        </div>
+
+                        {/* Filters */}
+                        <div className="flex gap-3">
+                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
+                                <option>Año 2024</option>
+                                <option>Año 2023</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {bulletins.map((bulletin) => (
+                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all group">
+                                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <FileText size={24} />
+                                </div>
+                                <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded inline-block mb-3">
+                                    {bulletin.week}
+                                </span>
+                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-blue-700 transition-colors">
+                                    {bulletin.title}
+                                </h4>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
+                                    <button className="text-blue-600 hover:bg-blue-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
+                                        <Download size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <button className="bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-sm">
+                            Cargar más boletines
+                        </button>
+                    </div>
+                </div>
+
+                {/* 2b. IAAS Bulletins Grid */}
+                <div className="mb-16">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800">Boletines de Infecciones Asociadas a la Atención en Salud</h2>
+                            <p className="text-gray-500 mt-1">Reportes de vigilancia de IAAS (Infecciones Intrahospitalarias).</p>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
+                                <option>Año 2024</option>
+                                <option>Año 2023</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {bulletinsIaas.map((bulletin) => (
+                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-200 transition-all group">
+                                <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <FileWarning size={24} />
+                                </div>
+                                <span className="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded inline-block mb-3">
+                                    {bulletin.week}
+                                </span>
+                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-purple-700 transition-colors">
+                                    {bulletin.title}
+                                </h4>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
+                                    <button className="text-purple-600 hover:bg-purple-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
+                                        <Download size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <button className="bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-sm">
+                            Cargar más boletines
+                        </button>
+                    </div>
+                </div>
+
+                {/* 2c. Statistical Bulletins Grid */}
+                <div className="mb-16">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800">Boletines Estadísticos</h2>
+                            <p className="text-gray-500 mt-1">Reportes trimestrales y anuales de producción hospitalaria y morbilidad.</p>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
+                                <option>Año 2024</option>
+                                <option>Año 2023</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {bulletinsEst.map((bulletin) => (
+                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-emerald-200 transition-all group">
+                                <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <BarChart3 size={24} />
+                                </div>
+                                <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded inline-block mb-3">
+                                    {bulletin.period}
+                                </span>
+                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-emerald-700 transition-colors">
+                                    {bulletin.title}
+                                </h4>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
+                                    <button className="text-emerald-600 hover:bg-emerald-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
+                                        <Download size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <button className="bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-sm">
+                            Cargar más boletines
+                        </button>
+                    </div>
+                </div>
+
+                {/* 3. Situational Rooms (Tabs) */}
+                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="bg-gray-50/50 p-6 md:p-8 border-b border-gray-100">
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">Sala Situacional Virtual</h2>
                         <p className="text-gray-500">Análisis detallado de eventos de importancia en salud pública territorial.</p>
@@ -197,52 +349,6 @@ export default function EpidemiologiaPage() {
                                 <p>Monitoreo de IRAG, COVID-19 e Influenza en desarrollo.</p>
                             </div>
                         )}
-                    </div>
-                </div>
-
-                {/* 3. Epidemiological Bulletins Grid */}
-                <div>
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-                        <div>
-                            <h2 className="text-2xl font-bold text-gray-800">Boletines Epidemiológicos</h2>
-                            <p className="text-gray-500 mt-1">Reportes oficiales descargables por semana epidemiológica (SE).</p>
-                        </div>
-
-                        {/* Filters */}
-                        <div className="flex gap-3">
-                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
-                                <option>Año 2024</option>
-                                <option>Año 2023</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {bulletins.map((bulletin) => (
-                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all group">
-                                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                    <FileText size={24} />
-                                </div>
-                                <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded inline-block mb-3">
-                                    {bulletin.week}
-                                </span>
-                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-blue-700 transition-colors">
-                                    {bulletin.title}
-                                </h4>
-                                <div className="flex items-center justify-between mt-4">
-                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
-                                    <button className="text-blue-600 hover:bg-blue-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
-                                        <Download size={18} />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-8 text-center">
-                        <button className="bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-sm">
-                            Cargar más boletines
-                        </button>
                     </div>
                 </div>
 
