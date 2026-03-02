@@ -40,6 +40,22 @@ const bulletinsEst = [
     { id: 4, title: 'Boletín Estadístico Anual', date: 'Enero 2024', size: '5.9 MB', period: 'Año 2023' },
 ];
 
+// Mock Data for Rendimiento Hora Médico
+const bulletinsRendimiento = [
+    { id: 1, title: 'Rendimiento Consulta Externa T3', date: 'Octubre 2024', size: '1.8 MB', doc: 'Reporte' },
+    { id: 2, title: 'Rendimiento Consulta Externa T2', date: 'Julio 2024', size: '1.7 MB', doc: 'Reporte' },
+    { id: 3, title: 'Rendimiento Consulta Externa T1', date: 'Abril 2024', size: '1.9 MB', doc: 'Reporte' },
+    { id: 4, title: 'Rendimiento Anual CMP', date: 'Enero 2024', size: '2.5 MB', doc: 'Consolidado' },
+];
+
+// Mock Data for Análisis de Indicadores
+const bulletinsAnalisisInd = [
+    { id: 1, title: 'Análisis de Indicadores (Ene-Sep)', date: 'Octubre 2024', size: '4.2 MB', doc: 'Evaluación' },
+    { id: 2, title: 'Análisis de Indicadores (Ene-Jun)', date: 'Julio 2024', size: '3.5 MB', doc: 'Evaluación' },
+    { id: 3, title: 'Análisis de Indicadores (Ene-Mar)', date: 'Abril 2024', size: '2.1 MB', doc: 'Evaluación' },
+    { id: 4, title: 'Evaluación Anual de Desempeño', date: 'Enero 2024', size: '5.8 MB', doc: 'Anual' },
+];
+
 export default function EpidemiologiaPage() {
     const [activeTab, setActiveTab] = useState('dengue');
     const [isCrisisActive, setIsCrisisActive] = useState(false); // Toggle to simulate Crisis Room
@@ -131,6 +147,86 @@ export default function EpidemiologiaPage() {
                                 </div>
                                 <h3 className="text-gray-500 text-sm font-medium mb-1">{ind.title}</h3>
                                 <p className="text-3xl font-bold text-gray-800">{ind.value}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 1b. Rendimiento Hora Médico */}
+                <div className="mb-16">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800">Rendimiento Hora Médico en Consulta Externa</h2>
+                            <p className="text-gray-500 mt-1">Evaluación de la productividad y horas médicas programadas.</p>
+                        </div>
+
+                        {/* Filters */}
+                        <div className="flex gap-3">
+                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
+                                <option>Año 2024</option>
+                                <option>Año 2023</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {bulletinsRendimiento.map((bulletin) => (
+                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-amber-200 transition-all group">
+                                <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <Activity size={24} />
+                                </div>
+                                <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded inline-block mb-3">
+                                    {bulletin.doc}
+                                </span>
+                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-amber-700 transition-colors">
+                                    {bulletin.title}
+                                </h4>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
+                                    <button className="text-amber-600 hover:bg-amber-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
+                                        <Download size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 1c. Análisis de Indicadores Hospitalarios */}
+                <div className="mb-16">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800">Análisis de Indicadores Hospitalarios</h2>
+                            <p className="text-gray-500 mt-1">Informes analíticos sobre el desempeño y calidad de atención institucional.</p>
+                        </div>
+
+                        {/* Filters */}
+                        <div className="flex gap-3">
+                            <select className="bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl outline-none text-sm font-medium shadow-sm">
+                                <option>Año 2024</option>
+                                <option>Año 2023</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {bulletinsAnalisisInd.map((bulletin) => (
+                            <div key={bulletin.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-indigo-200 transition-all group">
+                                <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <BarChart3 size={24} />
+                                </div>
+                                <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded inline-block mb-3">
+                                    {bulletin.doc}
+                                </span>
+                                <h4 className="font-bold text-gray-800 mb-1 leading-tight group-hover:text-indigo-700 transition-colors">
+                                    {bulletin.title}
+                                </h4>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-xs text-gray-500">{bulletin.date}</span>
+                                    <button className="text-indigo-600 hover:bg-indigo-50 p-2 rounded-lg transition-colors" title="Descargar PDF">
+                                        <Download size={18} />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
