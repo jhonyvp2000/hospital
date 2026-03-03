@@ -455,7 +455,7 @@ export default function EpidemiologiaPage() {
                                     onClick={() => setActiveTab('dengue')}
                                     className={`flex items-center gap-2 px-6 py-4 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${activeTab === 'dengue' ? 'border-blue-600 text-blue-600 bg-blue-50/50' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-50'}`}
                                 >
-                                    <Microscope size={18} /> Metaxénicas (Dengue)
+                                    <Microscope size={18} /> Metaxénicas
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('materno')}
