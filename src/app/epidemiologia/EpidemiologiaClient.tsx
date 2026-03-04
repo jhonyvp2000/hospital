@@ -13,14 +13,6 @@ export default function EpidemiologiaClient({ data }: any) {
     const [bolSubTab, setBolSubTab] = useState('epidemiologicos'); // 'epidemiologicos', 'iaas', 'estadisticos'
     const [salaSubTab, setSalaSubTab] = useState('metaxenicas'); // 'metaxenicas', 'materno', 'respiratorio'
 
-    // Static Indicators for UI (we aren't tracking these exactly in PG yet, keeping beautiful visual)
-    const topIndicators = [
-        { id: 1, title: 'Consultas Externas Anuales', value: '45,210', trend: '+15.2%', trendUp: true, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-        { id: 2, title: 'Atenciones en Emergencia Anual', value: '18,820', trend: '-2.1%', trendUp: false, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
-        { id: 3, title: 'Intervenciones Quirúrgicas', value: '4,845', trend: '+12.4%', trendUp: true, icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-        { id: 4, title: 'Ocupación Hospitalaria Media', value: '82%', trend: '+3.0%', trendUp: true, icon: Stethoscope, color: 'text-purple-600', bg: 'bg-purple-50' },
-    ];
-
     return (
         <main className="min-h-screen bg-gray-50 pb-20">
             {/* Hero Section */}
@@ -57,8 +49,8 @@ export default function EpidemiologiaClient({ data }: any) {
                     <button
                         onClick={() => setMainTab('indicadores')}
                         className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'indicadores'
-                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
-                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                            : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
                             }`}
                     >
                         <Activity size={20} className={mainTab === 'indicadores' ? 'text-blue-600' : 'text-blue-300'} />
@@ -68,8 +60,8 @@ export default function EpidemiologiaClient({ data }: any) {
                     <button
                         onClick={() => setMainTab('boletines')}
                         className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'boletines'
-                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
-                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                            : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
                             }`}
                     >
                         <FileText size={20} className={mainTab === 'boletines' ? 'text-blue-600' : 'text-blue-300'} />
@@ -79,8 +71,8 @@ export default function EpidemiologiaClient({ data }: any) {
                     <button
                         onClick={() => setMainTab('situacional')}
                         className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'situacional'
-                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
-                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                            : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
                             }`}
                     >
                         <BarChart3 size={20} className={mainTab === 'situacional' ? 'text-blue-600' : 'text-blue-300'} />
@@ -91,30 +83,6 @@ export default function EpidemiologiaClient({ data }: any) {
                 {/* --- PESTAÑA 1: INDICADORES HOSPITALARIOS --- */}
                 {mainTab === 'indicadores' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        {/* 1. Hospital Indicators KPIs (Estáticos decorativos) */}
-                        <div className="mb-16">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
-                                <h2 className="text-2xl font-bold text-gray-800">Cifras Globales del Centro</h2>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {topIndicators.map((ind) => (
-                                    <div key={ind.id} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${ind.bg} ${ind.color}`}>
-                                                <ind.icon size={24} />
-                                            </div>
-                                            <div className={`flex items-center gap-1 text-sm font-bold px-2 py-1 rounded-lg ${ind.trendUp ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>
-                                                {ind.trend}
-                                            </div>
-                                        </div>
-                                        <h3 className="text-gray-500 text-sm font-medium mb-1">{ind.title}</h3>
-                                        <p className="text-3xl font-bold text-gray-800">{ind.value}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
                         {/* Reports Layout with Left Sidebar */}
                         <div className="flex flex-col md:flex-row gap-8">
                             {/* Sidebar Menu */}
