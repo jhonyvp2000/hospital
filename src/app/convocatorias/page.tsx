@@ -25,7 +25,7 @@ const REGIMES = [
     { id: '276', label: 'Régimen 276', icon: Users, color: 'text-cyan-600', borderColor: 'border-cyan-600' },
     { id: '728', label: 'Régimen 728', icon: Building, color: 'text-emerald-600', borderColor: 'border-emerald-600' },
     { id: '30057', label: 'Servicio Civil', icon: Milestone, color: 'text-violet-600', borderColor: 'border-violet-600' },
-    { id: 'Múltiple', label: 'Locadores / Terceros', icon: HardHat, color: 'text-amber-600', borderColor: 'border-amber-600' },
+    { id: 'Múltiple', label: 'Locadores', icon: HardHat, color: 'text-amber-600', borderColor: 'border-amber-600' },
     { id: 'Proceso Interno', label: 'Procesos Internos', icon: FileSpreadsheet, color: 'text-slate-600', borderColor: 'border-slate-600' },
 ];
 
