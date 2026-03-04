@@ -53,24 +53,38 @@ export default function EpidemiologiaClient({ data }: any) {
             <main className="container mx-auto max-w-6xl px-4 -mt-32 lg:-mt-20 relative z-30">
 
                 {/* Main Tabs Navigation */}
-                <div className="flex overflow-x-auto bg-white/10 rounded-2xl p-2 mb-8 gap-2 relative z-40 backdrop-blur-md shadow-sm xl:overflow-visible scrollbar-hide">
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 mb-12 relative z-40">
                     <button
                         onClick={() => setMainTab('indicadores')}
-                        className={`flex-1 min-w-[200px] py-3 px-4 rounded-xl font-bold text-sm transition-all flex justify-center items-center gap-2 ${mainTab === 'indicadores' ? 'bg-white text-blue-800 shadow-md transform scale-105' : 'bg-white/40 text-blue-950 hover:bg-white/80'}`}
+                        className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'indicadores'
+                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            }`}
                     >
-                        <Activity size={18} /> Indicadores de Gestión
+                        <Activity size={20} className={mainTab === 'indicadores' ? 'text-blue-600' : 'text-blue-300'} />
+                        Indicadores de Gestión
                     </button>
+
                     <button
                         onClick={() => setMainTab('boletines')}
-                        className={`flex-1 min-w-[200px] py-3 px-4 rounded-xl font-bold text-sm transition-all flex justify-center items-center gap-2 ${mainTab === 'boletines' ? 'bg-white text-blue-800 shadow-md transform scale-105' : 'bg-white/40 text-blue-950 hover:bg-white/80'}`}
+                        className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'boletines'
+                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            }`}
                     >
-                        <FileText size={18} /> Repositorio de Boletines
+                        <FileText size={20} className={mainTab === 'boletines' ? 'text-blue-600' : 'text-blue-300'} />
+                        Repositorio de Boletines
                     </button>
+
                     <button
                         onClick={() => setMainTab('situacional')}
-                        className={`flex-1 min-w-[200px] py-3 px-4 rounded-xl font-bold text-sm transition-all flex justify-center items-center gap-2 ${mainTab === 'situacional' ? 'bg-white text-blue-800 shadow-md transform scale-105' : 'bg-white/40 text-blue-950 hover:bg-white/80'}`}
+                        className={`w-full md:w-auto py-4 px-6 md:px-8 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:-translate-y-1 ${mainTab === 'situacional'
+                                ? 'bg-white text-blue-800 ring-4 ring-white/20 shadow-blue-900/20 scale-105'
+                                : 'bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 backdrop-blur-md border border-blue-700/50 hover:text-white'
+                            }`}
                     >
-                        <BarChart3 size={18} /> Sala Situacional
+                        <BarChart3 size={20} className={mainTab === 'situacional' ? 'text-blue-600' : 'text-blue-300'} />
+                        Sala Situacional
                     </button>
                 </div>
 
