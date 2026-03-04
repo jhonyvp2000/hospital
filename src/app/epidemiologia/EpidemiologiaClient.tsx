@@ -157,137 +157,99 @@ export default function EpidemiologiaClient({ data }: any) {
 
                 {/* --- PESTAÑA 2: REPOSITORIO DE BOLETINES --- */}
                 {mainTab === 'boletines' && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col md:flex-row gap-8">
-                        {/* Sidebar Menu */}
-                        <div className="w-full md:w-64 shrink-0 space-y-2">
-                            <button
-                                onClick={() => setBolSubTab('epidemiologicos')}
-                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${bolSubTab === 'epidemiologicos' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm' : 'bg-white text-gray-600 border border-gray-100 hover:bg-gray-50'}`}
-                            >
-                                <span className="flex items-center gap-2"><Activity size={18} /> Epidemiológicos</span>
-                                <ChevronRight size={16} className={bolSubTab === 'epidemiologicos' ? 'text-emerald-500' : 'text-gray-300'} />
-                            </button>
-                            <button
-                                onClick={() => setBolSubTab('iaas')}
-                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${bolSubTab === 'iaas' ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-sm' : 'bg-white text-gray-600 border border-gray-100 hover:bg-gray-50'}`}
-                            >
-                                <span className="flex items-center gap-2"><FileWarning size={18} /> Infecciones IAAS</span>
-                                <ChevronRight size={16} className={bolSubTab === 'iaas' ? 'text-amber-500' : 'text-gray-300'} />
-                            </button>
-                            <button
-                                onClick={() => setBolSubTab('estadisticos')}
-                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${bolSubTab === 'estadisticos' ? 'bg-blue-50 text-blue-700 border border-blue-200 shadow-sm' : 'bg-white text-gray-600 border border-gray-100 hover:bg-gray-50'}`}
-                            >
-                                <span className="flex items-center gap-2"><BarChart3 size={18} /> Estadísticos</span>
-                                <ChevronRight size={16} className={bolSubTab === 'estadisticos' ? 'text-blue-500' : 'text-gray-300'} />
-                            </button>
-                        </div>
-
-                        {/* Boletines Content Based on Selection */}
-                        <div className="flex-1 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 min-h-[500px]">
-
-                            {bolSubTab === 'epidemiologicos' && (
-                                <div className="space-y-6 animate-in fade-in duration-300">
-                                    <div className="flex items-center gap-3 border-b border-gray-100 pb-6 mb-6">
-                                        <div className="p-3 bg-emerald-100 text-emerald-600 rounded-xl">
-                                            <Activity size={24} />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-2xl font-bold text-gray-800">Boletines Epidemiológicos</h2>
-                                            <p className="text-gray-500">Documentos oficiales publicables sobre tendencias sanitarias.</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {data.boletines.epidemiologicos.map((bulletin: any) => (
-                                            <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="flex items-center p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100 hover:bg-emerald-100 transition-colors group">
-                                                <div className="bg-emerald-200/50 p-3 rounded-lg mr-4 group-hover:bg-emerald-200 transition">
-                                                    <FileText className="text-emerald-700" size={20} />
-                                                </div>
-                                                <div className="flex-1">
-                                                    <p className="font-bold text-emerald-900 leading-tight mb-1">{bulletin.title}</p>
-                                                    <p className="text-xs text-emerald-700">{bulletin.date}</p>
-                                                </div>
-                                                <ExternalLink className="text-emerald-400 group-hover:text-emerald-600 transition" size={18} />
-                                            </a>
-                                        ))}
-                                    </div>
-                                    {data.boletines.epidemiologicos.length === 0 && (
-                                        <div className="py-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-2xl">
-                                            No hay boletines para mostrar.
-                                        </div>
-                                    )}
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div className="bg-slate-900 text-white p-8 md:p-10 border-b border-gray-100 relative overflow-hidden">
+                                <div className="absolute right-0 top-0 text-white/5 transform translate-x-10 -translate-y-10">
+                                    <FileText size={250} />
                                 </div>
-                            )}
+                                <h2 className="text-3xl font-bold mb-2 relative z-10">Repositorio de Boletines</h2>
+                                <p className="text-slate-400 relative z-10 max-w-xl">
+                                    Documentos e informes oficiales descargables sobre tendencias sanitarias, IAAS y estadísticas.
+                                </p>
+                            </div>
 
-                            {bolSubTab === 'iaas' && (
-                                <div className="space-y-6 animate-in fade-in duration-300">
-                                    <div className="flex items-center gap-3 border-b border-gray-100 pb-6 mb-6">
-                                        <div className="p-3 bg-amber-100 text-amber-600 rounded-xl">
-                                            <FileWarning size={24} />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-2xl font-bold text-gray-800">Boletines IAAS</h2>
-                                            <p className="text-gray-500">Reportes de vigilancia de IAAS (Infecciones Intrahospitalarias).</p>
+                            {/* Tab Navigation */}
+                            <div className="flex overflow-x-auto border-b border-gray-100 bg-gray-50/50 scrollbar-hide">
+                                <button
+                                    onClick={() => setBolSubTab('epidemiologicos')}
+                                    className={`flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${bolSubTab === 'epidemiologicos' ? 'border-emerald-600 text-emerald-700 bg-white' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-100'}`}
+                                >
+                                    <Activity size={18} /> Epidemiológicos
+                                </button>
+                                <button
+                                    onClick={() => setBolSubTab('iaas')}
+                                    className={`flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${bolSubTab === 'iaas' ? 'border-amber-600 text-amber-700 bg-white' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-100'}`}
+                                >
+                                    <FileWarning size={18} /> Infecciones IAAS
+                                </button>
+                                <button
+                                    onClick={() => setBolSubTab('estadisticos')}
+                                    className={`flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${bolSubTab === 'estadisticos' ? 'border-blue-600 text-blue-700 bg-white' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-100'}`}
+                                >
+                                    <BarChart3 size={18} /> Estadísticos
+                                </button>
+                            </div>
+
+                            {/* Tab Content */}
+                            <div className="p-8 bg-gray-50/30 min-h-[400px]">
+                                {bolSubTab === 'epidemiologicos' && (
+                                    <div className="animate-in fade-in duration-300">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                            {data.boletines.epidemiologicos.map((bulletin: any) => (
+                                                <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="block p-5 bg-white rounded-2xl shadow-sm border border-emerald-100 hover:-translate-y-1 hover:shadow-md transition-all group">
+                                                    <div className="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                                                        <FileText size={18} />
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 mb-1">{bulletin.title}</h4>
+                                                    <p className="text-xs font-semibold text-emerald-600 bg-emerald-50 inline-block px-2 py-0.5 rounded uppercase">{bulletin.date}</p>
+                                                </a>
+                                            ))}
+                                            {data.boletines.epidemiologicos.length === 0 && (
+                                                <p className="col-span-full py-8 text-center text-gray-400">Sin boletines epidemiológicos aún.</p>
+                                            )}
                                         </div>
                                     </div>
+                                )}
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {data.boletines.iaas.map((bulletin: any) => (
-                                            <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="flex items-center p-4 bg-amber-50/50 rounded-2xl border border-amber-100 hover:bg-amber-100 transition-colors group">
-                                                <div className="bg-amber-200/50 p-3 rounded-lg mr-4 group-hover:bg-amber-200 transition">
-                                                    <FileText className="text-amber-700" size={20} />
-                                                </div>
-                                                <div className="flex-1">
-                                                    <p className="font-bold text-amber-900 leading-tight mb-1">{bulletin.title}</p>
-                                                    <p className="text-xs text-amber-700">{bulletin.date}</p>
-                                                </div>
-                                                <ExternalLink className="text-amber-400 group-hover:text-amber-600 transition" size={18} />
-                                            </a>
-                                        ))}
-                                    </div>
-                                    {data.boletines.iaas.length === 0 && (
-                                        <div className="py-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-2xl">
-                                            No hay boletines para mostrar.
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-
-                            {bolSubTab === 'estadisticos' && (
-                                <div className="space-y-6 animate-in fade-in duration-300">
-                                    <div className="flex items-center gap-3 border-b border-gray-100 pb-6 mb-6">
-                                        <div className="p-3 bg-blue-100 text-blue-600 rounded-xl">
-                                            <BarChart3 size={24} />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-2xl font-bold text-gray-800">Boletines Estadísticos</h2>
-                                            <p className="text-gray-500">Resúmenes de analítica mensual, trimestral o anual.</p>
+                                {bolSubTab === 'iaas' && (
+                                    <div className="animate-in fade-in duration-300">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                            {data.boletines.iaas.map((bulletin: any) => (
+                                                <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="block p-5 bg-white rounded-2xl shadow-sm border border-amber-100 hover:-translate-y-1 hover:shadow-md transition-all group">
+                                                    <div className="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                                                        <FileText size={18} />
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 mb-1">{bulletin.title}</h4>
+                                                    <p className="text-xs font-semibold text-amber-600 bg-amber-50 inline-block px-2 py-0.5 rounded uppercase">{bulletin.date}</p>
+                                                </a>
+                                            ))}
+                                            {data.boletines.iaas.length === 0 && (
+                                                <p className="col-span-full py-8 text-center text-gray-400">Sin boletines IAAS aún.</p>
+                                            )}
                                         </div>
                                     </div>
+                                )}
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {data.boletines.estadisticos.map((bulletin: any) => (
-                                            <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="flex items-center p-4 bg-blue-50/50 rounded-2xl border border-blue-100 hover:bg-blue-100 transition-colors group">
-                                                <div className="bg-blue-200/50 p-3 rounded-lg mr-4 group-hover:bg-blue-200 transition">
-                                                    <FileText className="text-blue-700" size={20} />
-                                                </div>
-                                                <div className="flex-1">
-                                                    <p className="font-bold text-blue-900 leading-tight mb-1">{bulletin.title}</p>
-                                                    <p className="text-xs text-blue-700">{bulletin.date}</p>
-                                                </div>
-                                                <ExternalLink className="text-blue-400 group-hover:text-blue-600 transition" size={18} />
-                                            </a>
-                                        ))}
-                                    </div>
-                                    {data.boletines.estadisticos.length === 0 && (
-                                        <div className="py-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-2xl">
-                                            No hay boletines para mostrar.
+                                {bolSubTab === 'estadisticos' && (
+                                    <div className="animate-in fade-in duration-300">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                            {data.boletines.estadisticos.map((bulletin: any) => (
+                                                <a key={bulletin.id} href={bulletin.url} target="_blank" rel="noreferrer" className="block p-5 bg-white rounded-2xl shadow-sm border border-blue-100 hover:-translate-y-1 hover:shadow-md transition-all group">
+                                                    <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                                        <FileText size={18} />
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 mb-1">{bulletin.title}</h4>
+                                                    <p className="text-xs font-semibold text-blue-600 bg-blue-50 inline-block px-2 py-0.5 rounded uppercase">{bulletin.date}</p>
+                                                </a>
+                                            ))}
+                                            {data.boletines.estadisticos.length === 0 && (
+                                                <p className="col-span-full py-8 text-center text-gray-400">Sin boletines estadísticos aún.</p>
+                                            )}
                                         </div>
-                                    )}
-                                </div>
-                            )}
-
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )}
