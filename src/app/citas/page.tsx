@@ -51,7 +51,12 @@ export default function CitasPage() {
                             <a href="tel:042522133" className="flex items-center justify-center gap-2 w-full border border-gray-300 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-50 transition-colors">
                                 <Phone className="w-4 h-4" /> Central: (042) 522-133
                             </a>
-                            <a href="#" className="flex items-center justify-center gap-2 w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition-colors">
+                            <a
+                                href="https://wa.me/51987171910?text=Hola,%20deseo%20solicitar%20informaci%C3%B3n%20para%20una%20cita%20como%20paciente%20continuador."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2 w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition-colors"
+                            >
                                 <MessageCircle className="w-4 h-4" /> WhatsApp de Citas
                             </a>
                         </div>
