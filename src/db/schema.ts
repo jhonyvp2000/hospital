@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, boolean, serial, varchar, integer } from 'drizzle-orm/pg-core';
 
 export const employees = pgTable('employees', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -36,4 +36,43 @@ export const jobDocuments = pgTable('job_documents', {
     documentType: text('document_type').notNull(), // BASES, RESULTS_PRE, COMMUNIQUE, RESULTS_FINAL, OTHER
     isPublic: boolean('is_public').default(true).notNull(), // Visibility toggle for public frontend
     uploadedAt: timestamp('uploaded_at').defaultNow().notNull(),
+});
+
+// ==========================================
+// Módulo 1: Indicadores Hospitalarios Mensuales (PDFs)
+// ==========================================
+export const monthlyIndicators = pgTable("epi_monthly_indicators", {
+    id: serial("id").primaryKey(),
+    tab: varchar("tab", { length: 50 }).notNull(), // 'rendimiento' | 'analisis'
+    month: varchar("month", { length: 20 }).notNull(), // Ej. 'Enero'
+    year: integer("year").notNull(), // Ej. 2026
+    documentUrl: text("document_url").notNull(), // URL del archivo PDF en Supabase
+    createdBy: text("created_by"), // DNI o ID del usuario que subió el reporte
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// ==========================================
+// Módulo 2: Sala Situacional Semanal (PDFs por categoría)
+// ==========================================
+export const weeklySituational = pgTable("epi_weekly_situational", {
+    id: serial("id").primaryKey(),
+    tab: varchar("tab", { length: 50 }).notNull(), // 'metaxenicas' | 'materno' | 'respiratorio'
+    weekNumber: integer("week_number").notNull(), // Ej. 45
+    year: integer("year").notNull(), // Ej. 2026
+    documentUrl: text("document_url").notNull(), // URL del archivo PDF en Supabase
+    createdBy: text("created_by"), // Usuario que subió el reporte
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// ==========================================
+// Módulo 3: Boletines Mensuales (PDFs por categoría)
+// ==========================================
+export const monthlyBulletins = pgTable("epi_monthly_bulletins", {
+    id: serial("id").primaryKey(),
+    tab: varchar("tab", { length: 50 }).notNull(), // 'epidemiologico' | 'infecciones' | 'estadistico'
+    month: varchar("month", { length: 20 }).notNull(), // Ej. 'Enero'
+    year: integer("year").notNull(), // Ej. 2026
+    documentUrl: text("document_url").notNull(), // URL del archivo PDF en Supabase
+    createdBy: text("created_by"), // Usuario que subió el reporte
+    createdAt: timestamp("created_at").defaultNow().notNull(),
 });
