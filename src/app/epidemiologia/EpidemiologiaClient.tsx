@@ -83,99 +83,71 @@ export default function EpidemiologiaClient({ data }: any) {
                 {/* --- PESTAÑA 1: INDICADORES HOSPITALARIOS --- */}
                 {mainTab === 'indicadores' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        {/* Reports Layout with Left Sidebar */}
-                        <div className="flex flex-col md:flex-row gap-8">
-                            {/* Sidebar Menu */}
-                            <div className="w-full md:w-64 shrink-0 space-y-2">
+                        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div className="bg-slate-900 text-white p-8 md:p-10 border-b border-gray-100 relative overflow-hidden">
+                                <div className="absolute right-0 top-0 text-white/5 transform translate-x-10 -translate-y-10">
+                                    <Activity size={250} />
+                                </div>
+                                <h2 className="text-3xl font-bold mb-2 relative z-10">Indicadores de Gestión</h2>
+                                <p className="text-slate-400 relative z-10 max-w-xl">
+                                    Informes y métricas sobre el rendimiento, productividad y calidad hospitalaria.
+                                    Seleccione una categoría para consultar los documentos registrados.
+                                </p>
+                            </div>
+
+                            {/* Tab Navigation */}
+                            <div className="flex overflow-x-auto border-b border-gray-100 bg-gray-50/50 scrollbar-hide">
                                 <button
                                     onClick={() => setIndSubTab('rendimiento')}
-                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${indSubTab === 'rendimiento' ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-sm' : 'bg-white text-gray-600 border border-gray-100 hover:bg-gray-50'}`}
+                                    className={`flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${indSubTab === 'rendimiento' ? 'border-amber-600 text-amber-700 bg-white' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-100'}`}
                                 >
-                                    <span className="flex items-center gap-2"><Activity size={18} /> Rendimiento Médico</span>
-                                    <ChevronRight size={16} className={indSubTab === 'rendimiento' ? 'text-amber-500' : 'text-gray-300'} />
+                                    <Activity size={18} /> Rendimiento Médico
                                 </button>
                                 <button
                                     onClick={() => setIndSubTab('analisis')}
-                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${indSubTab === 'analisis' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm' : 'bg-white text-gray-600 border border-gray-100 hover:bg-gray-50'}`}
+                                    className={`flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2 ${indSubTab === 'analisis' ? 'border-indigo-600 text-indigo-700 bg-white' : 'border-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-100'}`}
                                 >
-                                    <span className="flex items-center gap-2"><BarChart3 size={18} /> Análisis de Indicadores</span>
-                                    <ChevronRight size={16} className={indSubTab === 'analisis' ? 'text-indigo-500' : 'text-gray-300'} />
+                                    <BarChart3 size={18} /> Análisis de Indicadores
                                 </button>
                             </div>
 
-                            {/* Reports Content Based on Selection */}
-                            <div className="flex-1 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 min-h-[400px]">
+                            {/* Tab Content */}
+                            <div className="p-8 bg-gray-50/30 min-h-[400px]">
                                 {indSubTab === 'rendimiento' && (
-                                    <div className="space-y-6 animate-in fade-in duration-300">
-                                        <div className="flex items-center gap-3 border-b border-gray-100 pb-6 mb-6">
-                                            <div className="p-3 bg-amber-100 text-amber-600 rounded-xl">
-                                                <Activity size={24} />
-                                            </div>
-                                            <div>
-                                                <h2 className="text-2xl font-bold text-gray-800">Rendimiento Hora Médico</h2>
-                                                <p className="text-gray-500">Productividad y análisis de horas médicas en Consulta Externa.</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    <div className="animate-in fade-in duration-300">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                             {data.indicadores.rendimiento.map((item: any) => (
-                                                <div key={item.id} className="bg-amber-50/30 p-5 rounded-2xl border border-amber-100 hover:shadow-md hover:border-amber-300 transition-all group flex flex-col h-full">
-                                                    <div className="flex-1">
-                                                        <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded inline-block mb-3">
-                                                            {item.date}
-                                                        </span>
-                                                        <h4 className="font-bold text-gray-800 mb-4 leading-tight">
-                                                            {item.title}
-                                                        </h4>
+                                                <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="block p-5 bg-white rounded-2xl shadow-sm border border-amber-100 hover:-translate-y-1 hover:shadow-md transition-all group">
+                                                    <div className="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                                                        <Download size={18} />
                                                     </div>
-                                                    <a href={item.url} target="_blank" rel="noreferrer" className="w-full flex justify-center items-center gap-2 bg-amber-600 text-white font-medium py-2 rounded-xl hover:bg-amber-700 transition mt-auto">
-                                                        <Download size={16} /> Descargar PDF
-                                                    </a>
-                                                </div>
+                                                    <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                                                    <p className="text-xs font-semibold text-amber-600 bg-amber-50 inline-block px-2 py-0.5 rounded uppercase">{item.date}</p>
+                                                </a>
                                             ))}
+                                            {data.indicadores.rendimiento.length === 0 && (
+                                                <p className="col-span-full py-8 text-center text-gray-400">Sin indicadores de rendimiento aún.</p>
+                                            )}
                                         </div>
-                                        {data.indicadores.rendimiento.length === 0 && (
-                                            <div className="py-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-2xl">
-                                                No hay indicadores de rendimiento registrados aún.
-                                            </div>
-                                        )}
                                     </div>
                                 )}
 
                                 {indSubTab === 'analisis' && (
-                                    <div className="space-y-6 animate-in fade-in duration-300">
-                                        <div className="flex items-center gap-3 border-b border-gray-100 pb-6 mb-6">
-                                            <div className="p-3 bg-indigo-100 text-indigo-600 rounded-xl">
-                                                <BarChart3 size={24} />
-                                            </div>
-                                            <div>
-                                                <h2 className="text-2xl font-bold text-gray-800">Análisis de Indicadores</h2>
-                                                <p className="text-gray-500">Informes analíticos sobre el desempeño y calidad hospitalaria.</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    <div className="animate-in fade-in duration-300">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                             {data.indicadores.analisis.map((item: any) => (
-                                                <div key={item.id} className="bg-indigo-50/30 p-5 rounded-2xl border border-indigo-100 hover:shadow-md hover:border-indigo-300 transition-all group flex flex-col h-full">
-                                                    <div className="flex-1">
-                                                        <span className="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded inline-block mb-3">
-                                                            {item.date}
-                                                        </span>
-                                                        <h4 className="font-bold text-gray-800 mb-4 leading-tight">
-                                                            {item.title}
-                                                        </h4>
+                                                <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="block p-5 bg-white rounded-2xl shadow-sm border border-indigo-100 hover:-translate-y-1 hover:shadow-md transition-all group">
+                                                    <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                                        <Download size={18} />
                                                     </div>
-                                                    <a href={item.url} target="_blank" rel="noreferrer" className="w-full flex justify-center items-center gap-2 bg-indigo-600 text-white font-medium py-2 rounded-xl hover:bg-indigo-700 transition mt-auto">
-                                                        <Download size={16} /> Descargar PDF
-                                                    </a>
-                                                </div>
+                                                    <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                                                    <p className="text-xs font-semibold text-indigo-600 bg-indigo-50 inline-block px-2 py-0.5 rounded uppercase">{item.date}</p>
+                                                </a>
                                             ))}
+                                            {data.indicadores.analisis.length === 0 && (
+                                                <p className="col-span-full py-8 text-center text-gray-400">Sin análisis de indicadores aún.</p>
+                                            )}
                                         </div>
-                                        {data.indicadores.analisis.length === 0 && (
-                                            <div className="py-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-2xl">
-                                                No hay análisis de indicadores registrados aún.
-                                            </div>
-                                        )}
                                     </div>
                                 )}
                             </div>
