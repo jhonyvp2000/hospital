@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FileText, User, Users, Calendar, ArrowRight, MessageCircle, Phone, Info } from 'lucide-react';
+import { FileText, User, Users, Calendar, ArrowRight, MessageCircle, Phone, Info, MapPin } from 'lucide-react';
 
 export default function CitasPage() {
     return (
@@ -72,8 +72,8 @@ export default function CitasPage() {
                                 Por normativa MINSA, debe atenderse primero en el Centro de Salud más cercano a su domicilio. Ellos evaluarán si necesita ser referido al hospital.
                             </p>
                         </div>
-                        <Link href="/directorio" className="block w-full text-hospital-blue text-center font-bold py-3 hover:underline">
-                            Ver Directorio de Redes de Salud
+                        <Link href="/redes-salud" className="flex items-center justify-center gap-2 w-full bg-white border-2 border-hospital-blue text-hospital-blue hover:bg-hospital-blue hover:text-white transition-colors text-center font-bold py-3 rounded-lg shadow-sm">
+                            <MapPin className="w-5 h-5" /> Ver Directorio de Redes de Salud
                         </Link>
                     </div>
 
