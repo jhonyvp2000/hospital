@@ -139,6 +139,15 @@ const SERVICE_DATA: ServiceCategory[] = [
                     { name: 'Teleconsulta por Médico Especialista' },
                     { name: 'Teleconsulta Médica en el Servicio de Salud Sub Especializado' },
                 ]
+            },
+            {
+                title: 'Atenciones Ambulatorias',
+                items: [
+                    { name: 'Por Psicólogo' },
+                    { name: 'Por Enfermera', details: ['Inmunizaciones TBC, VIH, CRED'] },
+                    { name: 'Por Cirujano Dentista' },
+                    { name: 'Por Nutricionista' },
+                ]
             }
         ]
     },
