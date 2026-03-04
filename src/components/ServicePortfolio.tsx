@@ -75,40 +75,47 @@ const SERVICE_DATA: ServiceCategory[] = [
         icon: Stethoscope,
         subcategories: [
             {
-                title: 'Consulta Externa (Especialidades)',
+                title: 'Especialidades Médicas',
                 items: [
-                    { name: 'Medicina Interna', details: ['Nefrología', 'Neurología', 'Cardiología', 'Psiquiatría', 'Reumatología', 'Infectología', 'Endocrinología', 'Gastroenterología', 'Neumología', 'Geriatría', 'Medicina Oncológica'] },
-                    { name: 'Cirugía', details: ['General', 'Cabeza y Cuello', 'Oncológica', 'Pediátrica', 'Neurocirugía', 'Oftalmología', 'Traumatología', 'Otorrinolaringología', 'Urología'] },
-                    { name: 'Pediatría y Neonatología' },
-                    { name: 'Ginecología y Obstetricia' },
-                    { name: 'Anestesiología' },
+                    { name: 'Cardiología' },
                     { name: 'Dermatología' },
-                    { name: 'Odontología' },
-                    { name: 'Psicología' },
-                    { name: 'Nutrición' },
+                    { name: 'Endocrinología' },
+                    { name: 'Enfermedades Infecciosas y Tropicales' },
+                    { name: 'Gastroenterología' },
+                    { name: 'Geriatría' },
+                    { name: 'Hematología' },
+                    { name: 'Medicina Física y de Rehabilitación' },
+                    { name: 'Medicina Interna' },
+                    { name: 'Medicina Oncológica' },
+                    { name: 'Nefrología' },
+                    { name: 'Neumología' },
+                    { name: 'Neurología' },
+                    { name: 'Psiquiatría' },
                 ]
             },
             {
-                title: 'Medicina de Rehabilitación',
+                title: 'Especialidades Quirúrgicas',
                 items: [
-                    { name: 'Terapia Física (Discapacidad Leve, Moderada y Severa)' },
-                    { name: 'Terapia Respiratoria' },
-                    { name: 'Terapia de Lenguaje' },
-                    { name: 'Terapia de Aprendizaje' },
+                    { name: 'Anestesiología' },
+                    { name: 'Cirugía de Cabeza, Cuello y Maxilofacial' },
+                    { name: 'Cirugía General' },
+                    { name: 'Cirugía Oncológica' },
+                    { name: 'Neurocirugía' },
+                    { name: 'Oftalmología' },
+                    { name: 'Ortopedia y Traumatología' },
+                    { name: 'Otorrinolaringología' },
+                    { name: 'Urología' },
                 ]
             },
             {
-                title: 'Nutrición y Dietética',
+                title: 'Materno Infantil y Servicios Afines',
                 items: [
-                    { name: 'Evaluación Nutricional' },
-                    { name: 'Soporte Nutricional' },
-                    { name: 'Fórmulas Lácteas y Enterales' },
-                ]
-            },
-            {
-                title: 'Actividad de Diálisis',
-                items: [
-                    { name: 'Diálisis Peritoneal' },
+                    { name: 'Cardiología Pediátrica' },
+                    { name: 'Cirugía Pediátrica' },
+                    { name: 'Ginecología y Obstetricia' },
+                    { name: 'Neonatología' },
+                    { name: 'Pediatría' },
+                    { name: 'Certificación de la Discapacidad' },
                 ]
             }
         ]
