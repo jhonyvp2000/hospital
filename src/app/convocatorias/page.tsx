@@ -61,73 +61,74 @@ export default function ConvocatoriasPage() {
     });
 
     return (
-        <main className="min-h-screen bg-slate-50 pb-20">
-            {/* Header Oscuro Premium estilo Sala Situacional */}
-            <header className="bg-slate-900 text-white pt-16 pb-12 px-4 relative overflow-hidden">
-                <div className="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-12 translate-y-[-10%]">
-                    <Briefcase size={350} />
-                </div>
-                <div className="container mx-auto max-w-7xl relative z-10">
-                    <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-6 backdrop-blur-md">
-                        Oportunidades Laborales
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Únete a Nuestro Equipo</h1>
-                    <p className="text-lg text-slate-300 max-w-2xl leading-relaxed mb-8 font-light">
-                        Descubre las oportunidades y procesos de selección vigentes en nuestra institución.
-                        Seleccione un régimen laboral para consultar las convocatorias actuales.
-                    </p>
+        <main className="min-h-screen bg-slate-50 py-10">
+            <div className="container mx-auto max-w-7xl px-4">
 
-                    {/* Search Bar integrado en Header */}
-                    <div className="max-w-xl bg-white/10 backdrop-blur-md p-2 rounded-2xl flex items-center border border-white/20 focus-within:border-white/50 transition-colors">
-                        <div className="pl-3 text-slate-300">
-                            <Search size={22} />
+                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                    {/* Header Oscuro Integrado estilo Sala Situacional */}
+                    <div className="bg-slate-900 text-white p-8 md:p-12 relative overflow-hidden">
+                        <div className="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-12 translate-y-[-10%]">
+                            <Briefcase size={350} />
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Buscar por cargo, especialidad o código..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="flex-1 bg-transparent py-2 px-3 text-white placeholder-slate-400 focus:outline-none"
-                        />
+                        <div className="relative z-10">
+                            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-6 backdrop-blur-md">
+                                Oportunidades Laborales
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-4">Únete a Nuestro Equipo</h1>
+                            <p className="text-lg text-slate-300 max-w-3xl leading-relaxed mb-8 font-light">
+                                Descubre las oportunidades y procesos de selección vigentes en nuestra institución.
+                                Seleccione un régimen laboral para consultar las convocatorias actuales.
+                            </p>
+
+                            {/* Search Bar integrado en Header */}
+                            <div className="max-w-xl bg-white/10 backdrop-blur-md p-2 rounded-2xl flex items-center border border-white/20 focus-within:border-white/50 transition-colors">
+                                <div className="pl-3 text-slate-300">
+                                    <Search size={22} />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Buscar por cargo, especialidad o código..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="flex-1 bg-transparent py-2 px-3 text-white placeholder-slate-400 focus:outline-none"
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </header>
 
-            <div className="container mx-auto max-w-7xl px-4 mt-6">
-                {/* Horizontal Tabs List (Los 6 Regímenes) */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-2 mb-8 flex flex-row overflow-x-auto snap-x hide-scrollbar scroll-smooth">
-                    {REGIMES.map((regime) => {
-                        const Icon = regime.icon;
-                        const isActive = activeTab === regime.id;
-                        return (
-                            <button
-                                key={regime.id}
-                                onClick={() => setActiveTab(regime.id)}
-                                className={`
-                                    flex items-center gap-2 px-6 py-4 rounded-xl font-bold whitespace-nowrap snap-center transition-all duration-300 flex-1 justify-center
-                                    ${isActive
-                                        ? `bg-slate-50 shadow-inner border-b-4 ${regime.borderColor} ${regime.color}`
-                                        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 border-b-4 border-transparent'}
-                                `}
-                            >
-                                <Icon size={18} className={isActive ? regime.color : 'text-gray-400'} />
-                                {regime.label}
-                            </button>
-                        );
-                    })}
-                </div>
+                    {/* Horizontal Tabs List (Los Regímenes unidos al header) */}
+                    <div className="flex overflow-x-auto border-b border-gray-100 bg-gray-50/50 hide-scrollbar scroll-smooth">
+                        {REGIMES.map((regime) => {
+                            const Icon = regime.icon;
+                            const isActive = activeTab === regime.id;
+                            return (
+                                <button
+                                    key={regime.id}
+                                    onClick={() => setActiveTab(regime.id)}
+                                    className={`
+                                        flex items-center gap-2 px-8 py-5 font-bold text-sm whitespace-nowrap transition-colors border-b-2
+                                        ${isActive
+                                            ? `bg-white ${regime.borderColor} ${regime.color}`
+                                            : 'border-transparent text-gray-500 hover:bg-gray-100 hover:text-gray-800'}
+                                    `}
+                                >
+                                    <Icon size={18} className={isActive ? regime.color : 'text-gray-400'} />
+                                    {regime.label}
+                                </button>
+                            );
+                        })}
+                    </div>
 
-                {/* Content Area */}
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    {/* Content Area */}
+                    <div className="bg-gray-50/30 min-h-[400px]">
 
                         {/* Header of Content Block */}
-                        <div className="p-6 md:p-8 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gray-50/50">
+                        <div className="p-6 md:p-8 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
                             <div>
                                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                                     Convocatorias Vigentes: {REGIMES.find(r => r.id === activeTab)?.label}
                                 </h2>
-                                <p className="text-gray-500">
+                                <p className="text-gray-500 mt-1">
                                     Mostrando {filteredJobs.length} registro(s) encontrado(s).
                                 </p>
                             </div>
@@ -136,19 +137,19 @@ export default function ConvocatoriasPage() {
                         {/* Results List */}
                         <div className="divide-y divide-gray-100">
                             {loading ? (
-                                <div className="p-16 text-center text-gray-500 flex flex-col items-center">
+                                <div className="p-16 text-center text-gray-500 flex flex-col items-center bg-white">
                                     <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-hospital-blue mb-4"></div>
                                     <p>Cargando información del sistema...</p>
                                 </div>
                             ) : filteredJobs.length === 0 ? (
-                                <div className="p-20 text-center text-gray-500">
+                                <div className="p-20 text-center text-gray-500 bg-white">
                                     <Briefcase size={56} className="mx-auto text-gray-300 mb-4" />
                                     <p className="text-xl font-medium text-gray-600">No hay convocatorias vigentes encontradas</p>
                                     <p className="text-gray-400 mt-2">Intente con otro régimen en la parte superior o retire el filtro de búsqueda.</p>
                                 </div>
                             ) : (
                                 filteredJobs.map((item) => (
-                                    <div key={item.id} className="p-6 md:p-8 hover:bg-slate-50/50 transition-colors flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center group">
+                                    <div key={item.id} className="p-6 md:p-8 bg-white hover:bg-slate-50/80 transition-colors flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center group">
 
                                         <div className="flex-1 w-full">
                                             <div className="flex flex-wrap items-center gap-3 mb-3">
