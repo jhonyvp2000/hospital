@@ -117,6 +117,28 @@ const SERVICE_DATA: ServiceCategory[] = [
                     { name: 'Pediatría' },
                     { name: 'Certificación de la Discapacidad' },
                 ]
+            },
+            {
+                title: 'Procedimientos Médicos',
+                items: [
+                    { name: 'Cardiología' },
+                    { name: 'Dermatología' },
+                    { name: 'Endocrinología' },
+                    { name: 'Gastroenterología' },
+                    { name: 'Ginecología y Obstetricia' },
+                    { name: 'Física y Rehabilitación' },
+                    { name: 'Oncológica' },
+                    { name: 'Neumología' },
+                    { name: 'Neurología' },
+                    { name: 'Oftalmología' },
+                    { name: 'Ortopedia y Traumatología' },
+                    { name: 'Otorrinolaringología' },
+                    { name: 'Urología' },
+                    { name: 'Cardiología Pediátrica' },
+                    { name: 'Radiología Oral' },
+                    { name: 'Teleconsulta por Médico Especialista' },
+                    { name: 'Teleconsulta Médica en el Servicio de Salud Sub Especializado' },
+                ]
             }
         ]
     },
