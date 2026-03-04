@@ -20,8 +20,8 @@ interface PublicJob {
 }
 
 const REGIMES = [
-    { id: 'Todos', label: 'Todos los Regímenes', icon: Briefcase, color: 'text-hospital-blue', borderColor: 'border-hospital-blue' },
-    { id: '1057', label: 'Régimen CAS', icon: FileSignature, color: 'text-indigo-600', borderColor: 'border-indigo-600' },
+    { id: 'Todos', label: 'Todos', icon: Briefcase, color: 'text-hospital-blue', borderColor: 'border-hospital-blue' },
+    { id: '1057', label: 'Régimen CAS', icon: FileSignature, color: 'text-blue-600', borderColor: 'border-blue-600' },
     { id: '276', label: 'Régimen 276', icon: Users, color: 'text-cyan-600', borderColor: 'border-cyan-600' },
     { id: '728', label: 'Régimen 728', icon: Building, color: 'text-emerald-600', borderColor: 'border-emerald-600' },
     { id: '30057', label: 'Servicio Civil', icon: Milestone, color: 'text-violet-600', borderColor: 'border-violet-600' },
@@ -66,23 +66,23 @@ export default function ConvocatoriasPage() {
 
                 <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                     {/* Header Oscuro Integrado estilo Sala Situacional */}
-                    <div className="bg-slate-900 text-white p-8 md:p-12 relative overflow-hidden">
-                        <div className="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-12 translate-y-[-10%]">
+                    <div className="bg-blue-800 text-white p-8 md:p-12 relative overflow-hidden">
+                        <div className="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 translate-y-[-10%]">
                             <Briefcase size={350} />
                         </div>
                         <div className="relative z-10">
-                            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-6 backdrop-blur-md">
+                            <div className="inline-flex items-center gap-2 bg-blue-700/50 border border-blue-400/30 text-blue-50 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-6 backdrop-blur-md">
                                 Oportunidades Laborales
                             </div>
                             <h1 className="text-4xl md:text-5xl font-bold mb-4">Únete a Nuestro Equipo</h1>
-                            <p className="text-lg text-slate-300 max-w-3xl leading-relaxed mb-8 font-light">
+                            <p className="text-lg text-blue-100 max-w-3xl leading-relaxed mb-8 font-light">
                                 Descubre las oportunidades y procesos de selección vigentes en nuestra institución.
                                 Seleccione un régimen laboral para consultar las convocatorias actuales.
                             </p>
 
                             {/* Search Bar integrado en Header */}
-                            <div className="max-w-xl bg-white/10 backdrop-blur-md p-2 rounded-2xl flex items-center border border-white/20 focus-within:border-white/50 transition-colors">
-                                <div className="pl-3 text-slate-300">
+                            <div className="max-w-xl bg-blue-900/40 backdrop-blur-md p-2 rounded-2xl flex items-center border border-blue-500/30 focus-within:border-blue-400/60 transition-colors">
+                                <div className="pl-3 text-blue-200">
                                     <Search size={22} />
                                 </div>
                                 <input
@@ -90,7 +90,7 @@ export default function ConvocatoriasPage() {
                                     placeholder="Buscar por cargo, especialidad o código..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="flex-1 bg-transparent py-2 px-3 text-white placeholder-slate-400 focus:outline-none"
+                                    className="flex-1 bg-transparent py-2 px-3 text-white placeholder-blue-300 focus:outline-none"
                                 />
                             </div>
                         </div>
