@@ -149,7 +149,17 @@ export default function Navbar() {
                         <div className="space-y-1">
                             {MENU_DATA.map((cat) => (
                                 <div key={cat.label} className="border-b border-gray-100 last:border-0 pb-4 mb-4">
-                                    <h3 className="font-bold text-hospital-blue mb-3 px-2">{cat.label}</h3>
+                                    {cat.type === 'link' ? (
+                                        <Link
+                                            href={cat.href || "/"}
+                                            className="block font-bold text-hospital-blue mb-3 px-2 py-1 hover:bg-gray-50 rounded-lg"
+                                            onClick={toggleMobileMenu}
+                                        >
+                                            {cat.label}
+                                        </Link>
+                                    ) : (
+                                        <h3 className="font-bold text-hospital-blue mb-3 px-2">{cat.label}</h3>
+                                    )}
                                     {/* Render flattened items for simpler mobile view */}
                                     <div className="space-y-1">
                                         {cat.columns?.map(col => (
