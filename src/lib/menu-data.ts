@@ -37,6 +37,7 @@ export const MENU_DATA: MenuCategory[] = [
         label: "USUARIOS",
         type: "mega",
         columns: [
+            /* 
             {
                 title: "Mi Salud 🩺",
                 items: [
@@ -45,7 +46,8 @@ export const MENU_DATA: MenuCategory[] = [
                     { title: "Mis Recetas", href: "/portal/recetas", icon: Pill, description: "Medicamentos pendientes" },
                     { title: "Próximos Pasos", href: "/portal/indicaciones", icon: Link, description: "Indicaciones médicas" },
                 ]
-            },
+            }, 
+            */
             {
                 title: "Guía del Paciente 📖",
                 items: [
